@@ -1,4 +1,5 @@
 // Inspired by https://yihui.org/en/2023/09/snap-slides/
+const audioState = {};
 
 (function(doc) {
     let page = doc.body;  // <body> is container of slides
@@ -84,7 +85,13 @@
 		console.log(`slide ${slide.getAttribute('id')} enter`);
 		audio = slide.querySelector('audio');
 		if (audio) {
-		    audio.play();
+            // Check if audio has been played before
+            if (!audioState[slide.getAttribute('id')]){
+                audio.play();
+                audioState[slide.getAttribute('id')] = true;
+            } else {
+                console.log('Audio already played before.')
+            }
 		}
 	    }
 	    else {
@@ -133,6 +140,15 @@
         }
     }
 
+    // Apply slide audio states
+    function initAudioState(){
+        const audio = doc.querySelectorAll('audio');
+        audio.forEach( a => {
+            slideId = a.closest('div.slide').id;
+            audioState[slideId] = false;
+        });
+    }
+
     // modify slides to include IDs, page numbers, embedded directives,
     // and audio auto-play
     function decorateSlides() {
@@ -153,6 +169,9 @@
             return;
         }
         decorateSlides();
+        initAudioState();
+
+        // Scroll to next slide from start slide
         const startButton = doc.getElementById('start');
         startButton.addEventListener('click', () => {
             const slides = doc.querySelectorAll('div.slide');
