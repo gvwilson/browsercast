@@ -9,10 +9,16 @@
   </head>
   <body>
     <h1>Browsercast</h1>
+    <button class="btn" id="start"> Start Slideshow > </button>
+
+    <hr/>
+
+    <h1>What is it?</h1>
     <p>
       A simple tool for narrating presentations.
     </p>
-    <audio controls=true>
+    <!-- <audio controls=true> -->
+    <audio>
         <source src="one.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -37,7 +43,7 @@
 
     <hr/>
 
-    <h2>The Solution (and Problems)</h2>
+    <h3>The Solution (and Problems)</h3>
     <ul>
       <li>Browsercast plays short snippets of audio as slides progress</li>
       <li>Uses <a href="https://yihui.org/en/2023/09/snap-slides/">snap-scroll</a></li>
