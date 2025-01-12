@@ -80,22 +80,23 @@ const audioState = {};
     function addSlideObserver(slide) {
 	// slide === entries[0] in the handler below
 	function obs(entries, observer) {
+        slideId = slide.getAttribute('id');
 	    if (entries[0].isIntersecting) {
-		window.location.hash = slide.getAttribute('id');
-		console.log(`slide ${slide.getAttribute('id')} enter`);
+		window.location.hash = slideId;
+		console.log(`slide ${slideId} enter`);
 		audio = slide.querySelector('audio');
 		if (audio) {
             // Check if audio has been played before
-            if (!audioState[slide.getAttribute('id')]){
+            if (!audioState[slideId]){
                 audio.play();
-                audioState[slide.getAttribute('id')] = true;
+                audioState[slideId] = true;
             } else {
                 console.log('Audio already played before.')
             }
 		}
 	    }
 	    else {
-		console.log(`slide ${slide.getAttribute('id')} exit`);
+		console.log(`slide ${slideId} exit`);
 		audio = slide.querySelector('audio');
 		if (audio) {
 		    audio.pause();
