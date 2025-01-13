@@ -18,7 +18,8 @@
 .footer {
     opacity: .5;
     position: absolute;
-    bottom: 0;
+    /* change the location */
+    top: 0;
     right: 0;
 }
 

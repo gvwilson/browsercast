@@ -78,14 +78,12 @@
     // Update URL to reflect current slide.
     function addSlideObserver(slide) {
 	// slide === entries[0] in the handler below
+    // deleted the audio to prevent autoplay 
 	function obs(entries, observer) {
 	    if (entries[0].isIntersecting) {
 		window.location.hash = slide.getAttribute('id');
 		console.log(`slide ${slide.getAttribute('id')} enter`);
 		audio = slide.querySelector('audio');
-		if (audio) {
-		    audio.play();
-		}
 	    }
 	    else {
 		console.log(`slide ${slide.getAttribute('id')} exit`);
@@ -100,7 +98,7 @@
 	observer.observe(slide);
     }
 
-    // Add page number to bottom right.
+    // Add page number to top right.
     function addPageNumber(slide, i, numSlides) {
 	const footer = newElement('span', 'footer');
 	slide.append(footer);
@@ -134,7 +132,7 @@
     }
 
     // modify slides to include IDs, page numbers, embedded directives,
-    // and audio auto-play
+    // and audio auto-play <- deleted it 
     function decorateSlides() {
         const slides = doc.querySelectorAll('div.slide');
         const numSlides = slides.length;
@@ -155,7 +153,9 @@
         decorateSlides();
         
         // press 'f' for fullscreen mode and 'o' for overview
+        // navigate to each slide by clicking its slide number 
         doc.addEventListener('keyup', (evt) => {
+            const numSlides = document.querySelectorAll('.slide').length;
             if (evt.target !== doc.body) {
                 return;
             }
@@ -164,6 +164,15 @@
             }
             else if (evt.key === 'o') {
                 doc.body.classList.toggle('overview');
+            }
+            else if (evt.key >= '0' && evt.key <= numSlides.toString()) {
+                const slideNumber = evt.key; // get the pressed number
+                const targetSlide = document.getElementById(`slide-${slideNumber}`);
+
+                if (targetSlide) {
+                    window.location.hash = `slide-${slideNumber}`; // update url 
+                    targetSlide.scrollIntoView(); // navigate to slide clicked 
+                }
             }
             sessionStorage.setItem('body-class', doc.body.className);
         });
