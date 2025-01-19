@@ -2,7 +2,7 @@ Feedback from friends F1 & F2
 
 Overall: Button navigation was intuitive, both would click the expected buttons for each feature.
 
-(Sketch: "feature1&2-d.png")
+(Sketch: "feature1-and-2-d.png")
 Feature #1 : Audio Playback Bar 
 - Both expected to click the button on the bottom left of the default view to expand the audio playback bar.
 - F1 expected volume button to show a slider that pops upwards.
