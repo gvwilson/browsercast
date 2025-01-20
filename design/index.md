@@ -1,9 +1,4 @@
-Feedback from friends F1 & F2
-
-Feedback from friends F1, F2, F3 
-
-Overall: Button navigation was intuitive, both would click the expected buttons for each feature.
-
+Feedback from friends F1 F2, F3, F4, & F5 
 
 **Feature #1 : Audio Playback Bar**
 
@@ -14,12 +9,14 @@ Overall: Button navigation was intuitive, both would click the expected buttons 
 
 (Sketch: "feature1-4.jpeg") 
 - All expected this to be the playback bar of the full presentation instead of each slides
-- Both F1 & F2 prefered the audio bar to be shown when click the play logo to avoid any clustering and hiding any presentation elements
-- F3 preferred the audio playback bar to be open by default due to less clicking
-- F1 thought good use of the standard play symbol
+- Both F3 & F4 prefered the audio bar to be shown when click the play logo to avoid any clustering and hiding any presentation elements
+- F5 preferred the audio playback bar to be open by default due to less clicking
+- F3 thought good use of the standard play symbol
 
 
 **Feature #2 : Help Page**
+
+(Sketch: "feature1-and-2-d.png") 
 - Both clicked the ? button on the top right of the default view.
 - F1 expected to open a new window (due to unfamiliarity with clicking help pages), F2 anticipated a pop-up window.
 - Suggested having more navigation like a table of contents or menu to choose sections from.
@@ -27,7 +24,7 @@ Overall: Button navigation was intuitive, both would click the expected buttons 
 
 (Sketch: "feature1-4.jpeg") 
 - Expectations of the logo(question mark) aligned with its actual function
-- F2 thought it was unnecessary as the the described keyboard shortcuts are what most people expect
+- F4 thought it was unnecessary as the the described keyboard shortcuts are what most people expect
 
 
 **Feature #3 : Slide Navigation**
@@ -39,10 +36,10 @@ Overall: Button navigation was intuitive, both would click the expected buttons 
 - Both expected to use the arrow keys or click the screen to go to the next slide.
 
 (Sketch: "feature1-4.jpeg") 
-- F1 was confused what the logo does until I instructed its function
-- F2 thought the `esc` button and `N` button to open and close the slide navigation was unnecessary as most people would expect to click the logo for such function
-- F2 expected to control the arrows for moving around the slides
-- F3 wanted the slide number to be shown
+- F3 was confused what the logo does until I instructed its function
+- F4 thought the `esc` button and `N` button to open and close the slide navigation was unnecessary as most people would expect to click the logo for such function
+- F4 expected to control the arrows for moving around the slides
+- F5 wanted the slide number to be shown
 
 
 **Feature #4 : Autoplay**
