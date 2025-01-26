@@ -1,3 +1,4 @@
+// References https://github.com/beforesemicolon/BFS-Projects/tree/audio-player-tag
 {
     class AudioPlayer extends HTMLElement {
         currentTime = 0;
