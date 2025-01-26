@@ -1,31 +1,14 @@
 {
     class AudioPlayer extends HTMLElement {
-        playing = false;
-        hasAutoplayed = false;
-        audioCtx = null;
-        track = null;
+        currentTime = 0;
+        duration = 0;
 
         constructor() {
             super();
 
             this.attachShadow({mode: 'open'})
-            // this.render();
-            // this.audioInit();
-            // this.attachEvents();
             this.render();
             this.addEventListeners();
-        }
-
-        // connectedCallback() {
-        //     this.render();
-        //     this.addEventListeners();
-        // }
-
-        audioInit() {
-            if (this.audioCtx) return; // Avoid reinitialization if Start button is clicked again
-            this.audioCtx = new AudioContext();
-            this.track = this.audioCtx.createMediaElementSource(this.audio);
-            this.track.connect(this.audioCtx.destination);
         }
 
         addEventListeners(){
@@ -43,40 +26,41 @@
                 }
             });
 
-            // Volume up button event
-            this.volUp.addEventListener('click', () => {
-                console.log("Volume up clicked");
-                if (this.audio.volume < 1) {
-                    this.audio.volume += 0.1;
-                }
-            });
-
-            // Volume down button event
-            this.volDown.addEventListener('click', () => {
-                console.log("Volume down clicked");
-                if (this.audio.volume > 0) {
-                    this.audio.volume -= 0.1;
-                }
-            });
 
             this.audio.addEventListener('ended', () => {
+                this.progressBar.value = Math.ceil(this.audio.duration); // ensures progress bar gets full
                 console.log("Audio ended.");
                 this.playBtn.textContent = 'Play';
             });
 
-        //     this.audio.addEventListener('play', () => {
-        //         if (this.hasAutoplayed) {
-        //             this.audio.play();
-        //             this.playing = true;
-        //             this.audio.textContent = 'pause';
-        //         }
-        //     })
-
-        //     this.audio.addEventListener('pause', () => {
-        //         this.playing = false;
-        //         this.audio.textContent = 'play';
+            this.audio.addEventListener('loadedmetadata', () => {;
+                this.progressBar.max = Math.ceil(this.audio.duration);
                 
-        //     })
+                const secs = parseInt(`${this.audio.duration % 60}`, 10).toString().padStart(2, '0');
+                const mins = parseInt(`${(this.audio.duration/60) % 60}`, 10).toString();
+                this.durationElapsed.textContent = `${mins}:${secs}`;
+            });
+
+            this.audio.addEventListener('timeupdate', () => {
+                this.updateAudioTime(this.audio.currentTime);
+            });
+
+            this.progressBar.addEventListener('input', () => {
+                this.seekTo(this.progressBar.value);
+            }, false);
+
+            this.volumeSlider.addEventListener('change', (e) => {
+                this.audio.volume = e.currentTarget.value / 100;
+            });
+        }
+
+        updateAudioTime(time) {
+            this.currentTime = time;
+            this.progressBar.value = this.currentTime;
+ 
+            const secs = parseInt(`${time % 60}`, 10).toString().padStart(2, '0');
+            const mins = parseInt(`${(time/60) % 60}`, 10);
+            this.currentTimeElapsed.textContent = `${mins}:${secs}`;
         }
 
         async audioPlay() {
@@ -95,6 +79,10 @@
             }
         }
 
+        seekTo(value) {
+            this.audio.currentTime = value;
+        }
+
         render(){
             this.shadowRoot.innerHTML = `
             <audio id="player">
@@ -102,8 +90,12 @@
             </audio>
             <div>
                 <button id="playBtn">Play</button> 
-                <button id="volUp">Vol +</button> 
-                <button id="volDown">Vol -</button> 
+                <div class="progress-indicator">
+                    <span class="current-time"> 0:00 </span>
+                    <input type="range" max="100" value="0" class="progress-bar">
+                    <span class="duration"> 0:00 </span>
+                </div>
+                <input type="range" max="100" value="100" class="volume-slider">
             </div>`;
 
             this.audio = this.shadowRoot.querySelector('audio');
@@ -114,23 +106,15 @@
             this.volUp = this.shadowRoot.querySelector('#volUp');
             this.volDown = this.shadowRoot.querySelector('#volDown');
 
+            this.progressIndicator = this.shadowRoot.querySelector('.progress-indicator');
+            this.currentTimeElapsed = this.progressIndicator.children[0];
+            this.progressBar = this.progressIndicator.children[1];
+            this.durationElapsed = this.progressIndicator.children[2];
+
+            this.volumeSlider = this.shadowRoot.querySelector('.volume-slider');
+
         }
 
-        // addAudioObserver() {
-        //     const observer = new IntersectionObserver((entries) => {
-        //         entries.forEach(entry => {
-        //             if (entry.isIntersecting) {
-        //                 this.audioInit();
-        //                 // this.attachEvents();
-        //                 this.addEventListeners();
-        //                 this.hasAutoplayed = true;
-        //                 console.log("Audio has autoplayed");
-        //             }
-        //         });
-        //     }, {threshold: 0.5});
-
-        //     observer.observe(this.audio);
-        // }
     }
     customElements.define('audio-controls', AudioPlayer);
 
