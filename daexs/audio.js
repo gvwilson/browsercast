@@ -86,6 +86,10 @@
                 <div class="volume-bar">
                     <input type="range" max="100" value="100" class="volume-slider">
                 </div>
+                <div class="captions"></div>
+                <div class="speed-adjust">
+                    <span class="current-speed">1.0x</span>
+                </div>
             </div>`;
 
             this.audio = this.shadowRoot.querySelector('audio');

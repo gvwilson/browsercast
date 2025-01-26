@@ -5,6 +5,7 @@
 }
 
 .slide {
+    position:relative;
     padding: 0.5em;
     position: relative;
     min-height: 100vh;
@@ -108,6 +109,10 @@ span.control-pause {
     cursor: pointer;
 }
 
-.audio-controls {
-    background: black;
+.controls-container {
+    position: absolute;
+    bottom: 3vh;
+    width: 100%;
+    left: 0;
+    right: 0;
 }
