@@ -9,20 +9,60 @@
             super();
 
             this.attachShadow({mode: 'open'})
-            this.render();
+            // this.render();
             // this.audioInit();
             // this.attachEvents();
+            this.render();
+            this.addEventListeners();
         }
 
-        // audioInit() {
-        //     if (this.audioCtx) return; // Avoid reinitialization if Start button is clicked again
-        //     this.audioCtx = new AudioContext();
-        //     this.track = this.audioCtx.createMediaElementSource(this.audio);
-        //     this.track.connect(this.audioCtx.destination);
+        // connectedCallback() {
+        //     this.render();
+        //     this.addEventListeners();
         // }
 
-        // attachEvents(){
-        //     this.playPauseBtn.addEventListener('click'. this.audioPlay.bind(this));
+        audioInit() {
+            if (this.audioCtx) return; // Avoid reinitialization if Start button is clicked again
+            this.audioCtx = new AudioContext();
+            this.track = this.audioCtx.createMediaElementSource(this.audio);
+            this.track.connect(this.audioCtx.destination);
+        }
+
+        addEventListeners(){
+            console.log("Binding event listeners");
+
+            // Play button click event
+            this.playBtn.addEventListener('click', () => {
+                console.log("Play button clicked");
+                if (this.audio.paused) {
+                    this.audio.play();
+                    this.playBtn.textContent = 'Pause';
+                } else {
+                    this.audio.pause();
+                    this.playBtn.textContent = 'Play';
+                }
+            });
+
+            // Volume up button event
+            this.volUp.addEventListener('click', () => {
+                console.log("Volume up clicked");
+                if (this.audio.volume < 1) {
+                    this.audio.volume += 0.1;
+                }
+            });
+
+            // Volume down button event
+            this.volDown.addEventListener('click', () => {
+                console.log("Volume down clicked");
+                if (this.audio.volume > 0) {
+                    this.audio.volume -= 0.1;
+                }
+            });
+
+            this.audio.addEventListener('ended', () => {
+                console.log("Audio ended.");
+                this.playBtn.textContent = 'Play';
+            });
 
         //     this.audio.addEventListener('play', () => {
         //         if (this.hasAutoplayed) {
@@ -37,7 +77,7 @@
         //         this.audio.textContent = 'play';
                 
         //     })
-        // }
+        }
 
         async audioPlay() {
             if (this.audioCtx.state === 'suspended') {
@@ -57,15 +97,22 @@
 
         render(){
             this.shadowRoot.innerHTML = `
-            <audio controls=true>
+            <audio id="player">
                 <source type="audio/mpeg">
-                Your browser does not support the audio element.
             </audio>
-            <button class="play-btn" type="button"> play </button>`;
+            <div>
+                <button id="playBtn">Play</button> 
+                <button id="volUp">Vol +</button> 
+                <button id="volDown">Vol -</button> 
+            </div>`;
 
             this.audio = this.shadowRoot.querySelector('audio');
             this.audio.src = this.getAttribute('src');
-            this.playBtn = this.shadowRoot.querySelector('.play-btn');
+
+            this.playBtn = this.shadowRoot.querySelector('#playBtn');
+            this.pauseBtn = this.shadowRoot.querySelector('#pauseBtn');
+            this.volUp = this.shadowRoot.querySelector('#volUp');
+            this.volDown = this.shadowRoot.querySelector('#volDown');
 
         }
 
@@ -75,6 +122,7 @@
         //             if (entry.isIntersecting) {
         //                 this.audioInit();
         //                 // this.attachEvents();
+        //                 this.addEventListeners();
         //                 this.hasAutoplayed = true;
         //                 console.log("Audio has autoplayed");
         //             }
