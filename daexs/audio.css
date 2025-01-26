@@ -98,6 +98,10 @@
 .current-speed {
     position: relative;
     text-align: center;
+    box-shadow: none;
+    outline: none;
+    border-width: 0;
+    background: none;
     color: #ffffff;
     font-size: 70%;
     font-weight: bold;

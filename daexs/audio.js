@@ -3,6 +3,7 @@
     class AudioPlayer extends HTMLElement {
         currentTime = 0;
         duration = 0;
+        currentSpeed = 1;
 
         constructor() {
             super();
@@ -56,6 +57,10 @@
             this.volumeSlider.addEventListener('change', (e) => {
                 this.audio.volume = e.currentTarget.value / 100;
             });
+
+            this.speedBtn.addEventListener('click', () => {
+                this.changeSpeed(this.audio.currentSpeed);
+            });
         }
 
         updateAudioTime(time) {
@@ -69,6 +74,19 @@
 
         seekTo(value) {
             this.audio.currentTime = value;
+        }
+
+        changeSpeed(curr) {
+            if (curr === 1) {
+                this.audio.currentSpeed = 1.5;
+            } else if (curr === 1.5) {
+                this.audio.currentSpeed = 2;
+            } else {
+                this.audio.currentSpeed = 1;
+            }
+
+            this.audio.playbackRate = this.audio.currentSpeed;
+            this.speedBtn.textContent = `${this.audio.currentSpeed.toFixed(1)}x`
         }
 
         render(){
@@ -89,7 +107,7 @@
                 </div>
                 <div class="captions"></div>
                 <div class="speed-adjust">
-                    <span class="current-speed">1.0x</span>
+                    <button class="current-speed">1.0x</button>
                 </div>
             </div>`;
 
@@ -109,6 +127,8 @@
             this.volumeSlider = this.shadowRoot.querySelector('.volume-slider');
 
             this.playBtn.classList.add('playing');
+            this.speedBtn = this.shadowRoot.querySelector('.current-speed');
+            this.audio.currentSpeed = 1;
 
         }
 
