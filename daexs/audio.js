@@ -61,6 +61,14 @@
             this.speedBtn.addEventListener('click', () => {
                 this.changeSpeed(this.audio.currentSpeed);
             });
+
+            this.captionsImg.addEventListener('click', () => {
+                if (this.captionsImg.style.backgroundImage === 'url("closed-captions.png")'){
+                    this.captionsImg.style.backgroundImage = 'url("closed-captions-on.png")'
+                } else {
+                    this.captionsImg.style.backgroundImage = 'url("closed-captions.png")'
+                }
+            });
         }
 
         updateAudioTime(time) {
@@ -129,6 +137,8 @@
             this.playBtn.classList.add('playing');
             this.speedBtn = this.shadowRoot.querySelector('.current-speed');
             this.audio.currentSpeed = 1;
+
+            this.captionsImg = this.shadowRoot.querySelector('.captions');
 
         }
 

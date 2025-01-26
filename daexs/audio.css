@@ -4,6 +4,8 @@
     background: black;
     display: flex;
     align-items: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 #playBtn, .volume-bar {
