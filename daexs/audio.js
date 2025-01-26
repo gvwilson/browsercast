@@ -20,9 +20,11 @@
                 if (this.audio.paused) {
                     this.audio.play();
                     this.playBtn.textContent = 'Pause';
+                    this.playBtn.classList.add('playing');
                 } else {
                     this.audio.pause();
                     this.playBtn.textContent = 'Play';
+                    this.playBtn.classList.remove('playing');
                 }
             });
 
@@ -31,6 +33,7 @@
                 this.progressBar.value = Math.ceil(this.audio.duration); // ensures progress bar gets full
                 console.log("Audio ended.");
                 this.playBtn.textContent = 'Play';
+                this.playBtn.classList.remove('playing');
             });
 
             this.audio.addEventListener('loadedmetadata', () => {;
@@ -63,39 +66,26 @@
             this.currentTimeElapsed.textContent = `${mins}:${secs}`;
         }
 
-        async audioPlay() {
-            if (this.audioCtx.state === 'suspended') {
-                await this.audioCtx.resume();
-            }
-
-            if (this.playing) {
-                await this.audio.pause();
-                this.playing = false;
-                this.audio.textContent = 'play';
-            } else {
-                await this.audio.play();
-                this.playing = true;
-                this.audio.textContent = 'pause';
-            }
-        }
-
         seekTo(value) {
             this.audio.currentTime = value;
         }
 
         render(){
-            this.shadowRoot.innerHTML = `
-            <audio id="player">
-                <source type="audio/mpeg">
-            </audio>
-            <div>
+            this.shadowRoot.innerHTML = ` 
+            <link rel="stylesheet" href="audio.css">
+            <div class="audio-bar">
+                <audio id="player">
+                    <source type="audio/mpeg">
+                </audio>
                 <button id="playBtn">Play</button> 
                 <div class="progress-indicator">
-                    <span class="current-time"> 0:00 </span>
+                    <span class="current-time">0:00</span>
                     <input type="range" max="100" value="0" class="progress-bar">
-                    <span class="duration"> 0:00 </span>
+                    <span class="duration">0:00 </span>
                 </div>
-                <input type="range" max="100" value="100" class="volume-slider">
+                <div class="volume-bar">
+                    <input type="range" max="100" value="100" class="volume-slider">
+                </div>
             </div>`;
 
             this.audio = this.shadowRoot.querySelector('audio');
@@ -112,6 +102,8 @@
             this.durationElapsed = this.progressIndicator.children[2];
 
             this.volumeSlider = this.shadowRoot.querySelector('.volume-slider');
+
+            this.playBtn.classList.add('playing');
 
         }
 

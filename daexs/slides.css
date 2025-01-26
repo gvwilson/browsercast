@@ -107,3 +107,7 @@ span.control-pause {
     font-size: 1.5rem;
     cursor: pointer;
 }
+
+.audio-controls {
+    background: black;
+}
