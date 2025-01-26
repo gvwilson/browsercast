@@ -188,8 +188,8 @@
                 audio.volume = volumeControl.value;
             });
 
-            // toggle volume slider on click
-            volumeBtn.addEventListener('click', () => {
+            // toggle volume slider on hover
+            volumeBtn.addEventListener('mouseover', () => {
             volumeControl.classList.toggle('hidden');
             });
 
