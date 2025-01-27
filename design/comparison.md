@@ -7,7 +7,7 @@ Comparing the implemented audio playback bar
 
 - caption button turns dark red when clicked to indicate it is on 
 
-- seperated the css & js file used for implementing the audio file 
+- separated the .css & .js file used for implementing the audio file 
 
 
 **Amy**
@@ -21,3 +21,16 @@ Comparing the implemented audio playback bar
 - volume control bar originally opened horizonatally next to the logo, changed it so it opens vertically above the logo after comparing 
 
 - location of the audio bar fixed to the bottom of each slide 
+
+
+Overall Thoughts:
+
+- Volume controls in Amy's version was originally horizontal, changed it to vertical based on prior feedback
+
+- Dropdown for speed controls offer more flexibility 
+
+- Color schemes for both are different, may be good for different use cases (eg. user preference, visibility issues, etc...)
+
+- Audio playback bar should stick to the bottom of the slide, however, overlap with the slide number is noticeable on some device screens.
+
+- Audio playback bar being 90% width seems better visually.
