@@ -1,8 +1,7 @@
 Comparing the implemented audio playback bar
 
-**Dalenia
-
-![](audiobar-kimmy.jpg)
+**Dalenia** 
+![](audiobar-daexs.png)
 
 - adjust the playback speed by repeatedly clicking a button, cycling through the available speed options of 1.0x, 1.5x, 2.0x 
 
@@ -11,10 +10,9 @@ Comparing the implemented audio playback bar
 - seperated the css & js file used for implementing the audio file 
 
 
-**Amy
+**Amy**
 
-![](audiobar-daexs.jpg)
-
+![](audiobar-kimmy.png)
 
 - choose the playback speed from a list of predefined options; 0.5x, 1x, 1.5x, 2x using a dropdown
 
