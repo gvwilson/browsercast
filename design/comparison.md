@@ -23,7 +23,7 @@ Comparing the implemented audio playback bar
 - location of the audio bar fixed to the bottom of each slide 
 
 
-Overall Thoughts:
+**Overall Thoughts:**
 
 - Volume controls in Amy's version was originally horizontal, changed it to vertical based on prior feedback
 
@@ -34,3 +34,11 @@ Overall Thoughts:
 - Audio playback bar should stick to the bottom of the slide, however, overlap with the slide number is noticeable on some device screens.
 
 - Audio playback bar being 90% width seems better visually.
+
+&nbsp;
+
+- Think it's good practice to separate files associated with each features like Daelenia’s to increase readability and avoid complexity later on 
+
+- For implementation, Daelenia created a new custom HTML element that inherits from standard HTML elements, introducing an interesting new method to learn  
+
+- Was a chance to learn other concepts like shadow DOM, which encapsulates JavaScript and CSS, making them hidden from the main document
