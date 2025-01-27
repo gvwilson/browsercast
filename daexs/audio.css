@@ -16,18 +16,18 @@
 
 #playBtn{
     text-indent: -9999px;
-    background: url("audio-icons.png") 0 center/500% 100% no-repeat;
+    background: url("images/audio-icons.png") 0 center/500% 100% no-repeat;
     appearance: none;
     border: none;
     overflow: hidden;
 }
 
 #playBtn.playing {
-    background: url("audio-icons.png") 25% center/500% 100% no-repeat;
+    background: url("images/audio-icons.png") 25% center/500% 100% no-repeat;
 }
 
 .volume-bar {
-    background: url("audio-icons.png") 100% center/500% 100% no-repeat;
+    background: url("images/audio-icons.png") 100% center/500% 100% no-repeat;
     position:relative;
 }
 
@@ -84,7 +84,7 @@
 .captions {
     width: 30px;
     height: 30px;
-    background: url("closed-captions.png") 0 center no-repeat;
+    background: url("images/closed-captions.png") 0 center no-repeat;
     background-size: contain; 
     background-position: center; 
 }

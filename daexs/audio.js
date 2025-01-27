@@ -63,10 +63,10 @@
             });
 
             this.captionsImg.addEventListener('click', () => {
-                if (this.captionsImg.style.backgroundImage === 'url("closed-captions.png")'){
-                    this.captionsImg.style.backgroundImage = 'url("closed-captions-on.png")'
+                if (this.captionsImg.style.backgroundImage === 'url("images/closed-captions.png")'){
+                    this.captionsImg.style.backgroundImage = 'url("images/closed-captions-on.png")'
                 } else {
-                    this.captionsImg.style.backgroundImage = 'url("closed-captions.png")'
+                    this.captionsImg.style.backgroundImage = 'url("images/closed-captions.png")'
                 }
             });
         }
