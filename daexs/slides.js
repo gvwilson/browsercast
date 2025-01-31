@@ -112,13 +112,13 @@ const audioState = {};
 	observer.observe(slide);
     }
 
-    // Add page number to bottom right.
+    // Add page number to top right.
     function addPageNumber(slide, i, numSlides) {
-	const footer = newElement('span', 'footer');
-	slide.append(footer);
+	const header = newElement('span', 'page-num');
+	slide.append(header);
         const pageNum = newElement('span', 'page-number');
         pageNum.innerText = `${i + 1}/${numSlides}`;
-	footer.append(pageNum);
+    header.append(pageNum);
     }
 
     // Apply slide attributes in <!--# --> comments.

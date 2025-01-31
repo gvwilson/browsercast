@@ -18,7 +18,6 @@
 
             // Play button click event
             this.playBtn.addEventListener('click', () => {
-                console.log("Play button clicked");
                 if (this.audio.paused) {
                     this.audio.play();
                     this.playBtn.textContent = 'Pause';
@@ -63,11 +62,21 @@
             });
 
             this.captionsImg.addEventListener('click', () => {
-                if (this.captionsImg.style.backgroundImage === 'url("images/closed-captions.png")'){
+                if (this.captionsImg.style.backgroundImage === 'url("images/cc.png")'){
                     this.captionsImg.style.backgroundImage = 'url("images/closed-captions-on.png")'
                 } else {
-                    this.captionsImg.style.backgroundImage = 'url("images/closed-captions.png")'
+                    this.captionsImg.style.backgroundImage = 'url("images/cc.png")'
                 }
+            });
+
+            this.fwdBtn.addEventListener('click', () => {
+                this.audio.currentTime = Math.min(this.audio.currentTime + 15, this.audio.duration);
+                this.updateAudioTime(this.audio.currentTime);
+            });
+
+            this.rewindBtn.addEventListener('click', () => {
+                this.audio.currentTime = Math.max(this.audio.currentTime - 15, 0);
+                this.updateAudioTime(this.audio.currentTime);
             });
         }
 
@@ -104,7 +113,9 @@
                 <audio id="player">
                     <source type="audio/mpeg">
                 </audio>
+                <div class="rewind-btn"></div>
                 <button id="playBtn">Play</button> 
+                <div class="forward-btn"></div>
                 <div class="progress-indicator">
                     <span class="current-time">0:00</span>
                     <input type="range" max="100" value="0" class="progress-bar">
@@ -139,6 +150,8 @@
             this.audio.currentSpeed = 1;
 
             this.captionsImg = this.shadowRoot.querySelector('.captions');
+            this.fwdBtn = this.shadowRoot.querySelector('.forward-btn');
+            this.rewindBtn = this.shadowRoot.querySelector('.rewind-btn');
 
         }
 
