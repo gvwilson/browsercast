@@ -57,10 +57,6 @@
                 this.audio.volume = e.currentTarget.value / 100;
             });
 
-            this.speedBtn.addEventListener('click', () => {
-                this.changeSpeed(this.audio.currentSpeed);
-            });
-
             this.captionsImg.addEventListener('click', () => {
                 if (this.captionsImg.style.backgroundImage === 'url("images/cc.png")'){
                     this.captionsImg.style.backgroundImage = 'url("images/closed-captions-on.png")'
@@ -77,6 +73,11 @@
             this.rewindBtn.addEventListener('click', () => {
                 this.audio.currentTime = Math.max(this.audio.currentTime - 15, 0);
                 this.updateAudioTime(this.audio.currentTime);
+            });
+
+            this.playbackSpeed.addEventListener('change', () => {
+                console.log(this.playbackSpeed.value);
+                this.audio.playbackRate = this.playbackSpeed.value;
             });
         }
 
@@ -126,7 +127,12 @@
                 </div>
                 <div class="captions"></div>
                 <div class="speed-adjust">
-                    <button class="current-speed">1.0x</button>
+                    <select class="playback-speed">
+                        <option value="0.5">0.5x</option>
+                        <option value="1" selected>1.0x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
+                    </select>
                 </div>
             </div>`;
 
@@ -152,7 +158,7 @@
             this.captionsImg = this.shadowRoot.querySelector('.captions');
             this.fwdBtn = this.shadowRoot.querySelector('.forward-btn');
             this.rewindBtn = this.shadowRoot.querySelector('.rewind-btn');
-
+            this.playbackSpeed = this.shadowRoot.querySelector('.playback-speed');
         }
 
     }

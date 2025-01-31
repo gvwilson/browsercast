@@ -90,6 +90,7 @@
     background: url("images/cc.png") 0 center no-repeat;
     background-size: contain; 
     background-position: center; 
+    cursor: pointer;
 }
 
 .speed-adjust {
@@ -125,4 +126,15 @@
     height: 25px;
     background: url("images/backword.png") 0 center no-repeat;
     background-size: contain;
+}
+
+select {
+    border-width: 0;
+    -webkit-appearance: none; /* Chrome/Safari */
+    -moz-appearance: none; /* Firefox */
+    appearance: none;
+    background-color: #f5f5f5;
+    font-size: 70%;
+    font-weight: bold;
+    text-align: center;
 }
