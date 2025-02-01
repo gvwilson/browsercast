@@ -1,5 +1,6 @@
 // js functions to implement all features 
 const doc = document; 
+
 function audioBarFeature(){
     const slides = doc.querySelectorAll('div.slide');
 
@@ -8,7 +9,9 @@ function audioBarFeature(){
         const audio = slide.querySelector('audio');
         if (audio === null){
             return;
-        } 
+        } else {
+            audio.play(); 
+        }
         const playPauseBtn = slide.querySelector('.playPauseBtn');
         const timeDisplay = slide.querySelector('.timeDisplay');
         const seekBar = slide.querySelector('.seekBar');
@@ -17,6 +20,16 @@ function audioBarFeature(){
         const playbackSpeed = slide.querySelector('.playbackSpeed'); 
         const forwordBtn = slide.querySelector('.forward');
         const backwardBtn = slide.querySelector('.backword');
+        const captionBtn = slide.querySelector('.caption')
+
+        // change the play button when audio is playing 
+        if (audio.paused) {
+            console.log(audio.paused); 
+            playPauseBtn.className = 'fa-solid fa-play pointer';
+        } else {
+            console.log("playing")
+            playPauseBtn.className = 'fa-solid fa-pause pointer';
+        }
 
         // play/pause functionality
         playPauseBtn.addEventListener('click', () => {
@@ -92,6 +105,21 @@ function audioBarFeature(){
             }, 100)  
         })
 
+        // change the caption icon when click 
+        captionBtn.addEventListener('click', ()=>{
+            // const imgSrc = captionBtn.src; 
+            // if (imgSrc.includes("-on")){
+            //     captionBtn.src = "./images/closed-captions.png"; 
+            // } else {
+            //     captionBtn.src = "./images/closed-captions-on.png";
+            // }
+            // using data next method to switch attributes 
+            const currSrc = captionBtn.src; 
+            const nextSrc = captionBtn.getAttribute("data-next");
+
+            captionBtn.src = nextSrc;
+            captionBtn.setAttribute("data-next", currSrc); // Store the old image for future clicks
+        })
     })
 }
 
@@ -110,7 +138,9 @@ function newAudioBar(){
     audioTags.forEach(audioTag => {
         // create the outer div element that wraps around all the feature 
         const audioPlayerDiv = doc.createElement('div'); 
+        const audioPlayerParent = doc.createElement('div'); 
         audioPlayerDiv.className = 'audio-player';
+        audioPlayerParent.className = 'audio-player-par'; 
         // newElement('div', 'audio-player');
 
         // add customized features into the new div
@@ -121,10 +151,13 @@ function newAudioBar(){
 
             <input class="seekBar" type="range" min="0" value="0">
             <span class="timeDisplay"></span>
-            <i class="fa-regular fa-closed-captioning fa-sm pointer caption"></i>
+
+            <!-- <i class="fa-regular fa-closed-captioning fa-sm pointer caption"></i> -->
+            <img src="./images/closed-captions.png" data-next="./images/closed-captions-on.png" class="pointer caption">
+            
             <i class="fa-solid fa-volume-high fa-sm pointer volumeBtn"></i>
             <input class="volumeControl hidden" type="range" min="0" max="1" step="0.01" value="1">
-            <select class="playbackSpeed">
+            <select class="playbackSpeed pointer">
                 <option value="0.5">0.5x</option>
                 <option value="1" selected>1.0x</option>
                 <option value="1.5">1.5x</option>
@@ -133,10 +166,17 @@ function newAudioBar(){
         `;
 
         // add the customized audio bar before the audio tag 
-        audioTag.parentNode.insertBefore(audioPlayerDiv, audioTag);
+        // audioTag.parentNode.insertBefore(audioPlayerDiv, audioTag);
 
-        // move the audio tag inside the customized div 
+        // Add audioPlayerDiv inside audioPlayerParent
+        audioPlayerParent.appendChild(audioPlayerDiv);
+
+        // Insert the parent container before the audio tag
+        audioTag.parentNode.insertBefore(audioPlayerParent, audioTag);
+
+        // Move the audio tag inside the customized audioPlayerDiv
         audioPlayerDiv.appendChild(audioTag);
+
     }); 
 
     audioBarFeature();

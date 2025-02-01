@@ -1,8 +1,14 @@
 /* custom audio playback bar */
+.audio-player-par{
+    display: flex;
+    justify-content: center; 
+}
+
 .audio-player {
     display: flex;
     align-items: center;
-    width: 90%;
+
+    width: 95%;
     gap: 15px; 
     background: #f5f5f5;
     padding: 15px;
@@ -27,16 +33,18 @@
     position: absolute;
     /* make the volume control bar to show upwards */
     rotate: 270deg;
-    right: 60px;
+    right: 28px;
     bottom: 90px;
 }
 
 .playbackSpeed {
-    padding: 5px;
-    border: 1px solid #ccc;
+    appearance: none;
+    border: none; 
+    background-color: #f5f5f5;
+    /* outline: none; */
+
+    /* border: 1px solid #ccc; */
     border-radius: 5px;
-    /* background: white; */
-    cursor: pointer;
     font-size: medium;
 }
 
@@ -54,4 +62,8 @@
 
 .forward, .backword{
     width: 23px;
+}
+
+.caption{
+    width: 1.7rem;
 }

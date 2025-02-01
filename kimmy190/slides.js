@@ -78,12 +78,17 @@
     // Update URL to reflect current slide.
     function addSlideObserver(slide) {
 	// slide === entries[0] in the handler below
-    // deleted the audio to prevent autoplay 
+    // deleted the audio to prevent autoplay  
+
 	function obs(entries, observer) {
 	    if (entries[0].isIntersecting) {
 		window.location.hash = slide.getAttribute('id');
 		console.log(`slide ${slide.getAttribute('id')} enter`);
 		audio = slide.querySelector('audio');
+        // enable autoplay
+        // if (audio) {
+		//     audio.play(); 
+		// }
 	    }
 	    else {
 		console.log(`slide ${slide.getAttribute('id')} exit`);
