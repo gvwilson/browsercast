@@ -140,7 +140,7 @@ function newAudioBar(){
         const audioPlayerDiv = doc.createElement('div'); 
         const audioPlayerParent = doc.createElement('div'); 
         audioPlayerDiv.className = 'audio-player';
-        audioPlayerParent.className = 'audio-player-par'; 
+        audioPlayerParent.className = 'audio-bar-container'; 
         // newElement('div', 'audio-player');
 
         // add customized features into the new div
