@@ -69,7 +69,7 @@ function audioBarFeature(){
 
         // toggle volume slider on hover
         volumeBtn.addEventListener('mouseover', () => {
-        volumeControl.classList.toggle('hidden');
+            volumeControl.classList.toggle('hidden');
         });
 
         // hide the slider when clicking outside
@@ -94,11 +94,6 @@ function audioBarFeature(){
             setTimeout(()=>{
                 // reset logo 
                 playPauseBtn.className = 'fa-solid fa-play pointer';
-                // reset time 
-                // timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
-                // reset seek bar 
-                //seekBar.value = 0;
-                // reset playback speed & audio rate 
                 playbackSpeed.value = 1.0;
                 audio.playbackRate = 1.0;
             }, 100)  
@@ -106,12 +101,6 @@ function audioBarFeature(){
 
         // change the caption icon when click 
         captionBtn.addEventListener('click', ()=>{
-            // const imgSrc = captionBtn.src; 
-            // if (imgSrc.includes("-on")){
-            //     captionBtn.src = "./images/closed-captions.png"; 
-            // } else {
-            //     captionBtn.src = "./images/closed-captions-on.png";
-            // }
             // using data next method to switch attributes 
             const currSrc = captionBtn.src; 
             const nextSrc = captionBtn.getAttribute("data-next");
@@ -140,7 +129,6 @@ function newAudioBar(){
         const audioPlayerParent = doc.createElement('div'); 
         audioPlayerDiv.className = 'audio-player';
         audioPlayerParent.className = 'audio-bar-container'; 
-        // newElement('div', 'audio-player');
 
         // add customized features into the new div
         audioPlayerDiv.innerHTML = `
@@ -163,9 +151,6 @@ function newAudioBar(){
                 <option value="2">2x</option>
             </select>
         `;
-
-        // add the customized audio bar before the audio tag 
-        // audioTag.parentNode.insertBefore(audioPlayerDiv, audioTag);
 
         // Add audioPlayerDiv inside audioPlayerParent
         audioPlayerParent.appendChild(audioPlayerDiv);
