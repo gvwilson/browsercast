@@ -1,5 +1,6 @@
 // Inspired by https://yihui.org/en/2023/09/snap-slides/
 const audioState = {};
+ isAudioInitialized = false;
 
 (function(doc) {
     let page = doc.body;  // <body> is container of slides
@@ -84,16 +85,19 @@ const audioState = {};
 	    if (entries[0].isIntersecting) {
 		window.location.hash = slideId;
 		console.log(`slide ${slideId} enter`);
-		audio = slide.querySelector('audio');
-		if (audio) {
-            // Check if audio has been played before
-            if (!audioState[slideId]){
-                audio.play();
-                audioState[slideId] = true;
-            } else {
-                console.log('Audio already played before.')
+		audioControls = slide.querySelector('audio-controls'); 
+        if (audioControls){
+            audio = audioControls.shadowRoot.querySelector('audio');
+            if (audio) {
+                // Check if audio has been played before
+                if (!audioState[slideId]){
+                    audio.play();
+                    audioState[slideId] = true;
+                } else {
+                    console.log('Audio already played before.')
+                }
             }
-		}
+        }
 	    }
 	    else {
 		console.log(`slide ${slideId} exit`);
@@ -108,13 +112,13 @@ const audioState = {};
 	observer.observe(slide);
     }
 
-    // Add page number to bottom right.
+    // Add page number to top right.
     function addPageNumber(slide, i, numSlides) {
-	const footer = newElement('span', 'footer');
-	slide.append(footer);
+	const header = newElement('span', 'page-num');
+	slide.append(header);
         const pageNum = newElement('span', 'page-number');
         pageNum.innerText = `${i + 1}/${numSlides}`;
-	footer.append(pageNum);
+    header.append(pageNum);
     }
 
     // Apply slide attributes in <!--# --> comments.
@@ -141,7 +145,7 @@ const audioState = {};
         }
     }
 
-    // Apply slide audio states
+    // Apply slide audio states & format
     function initAudioState(){
         const audio = doc.querySelectorAll('audio');
         audio.forEach( a => {
@@ -157,8 +161,8 @@ const audioState = {};
         const numSlides = slides.length;
         slides.forEach((s, i) => {
 	    addSlideId(s, i);
-            addPageNumber(s, i, numSlides);
-            applyDirectives(s);
+        addPageNumber(s, i, numSlides);
+        applyDirectives(s);
 	    addSlideObserver(s);
         });
     }

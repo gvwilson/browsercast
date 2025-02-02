@@ -5,6 +5,7 @@
 }
 
 .slide {
+    position:relative;
     padding: 0.5em;
     position: relative;
     min-height: 100vh;
@@ -15,11 +16,11 @@
     margin-top: unset;
 }
 
-.footer {
+.page-num {
     opacity: .5;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    top: 0;
+    right: 10px;
 }
 
 .overview {
@@ -106,4 +107,12 @@ span.control-pause {
     background-color: aliceblue;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.controls-container {
+    position: absolute;
+    bottom: 3vh;
+    width: 100%;
+    left: 34px;
+    right: 0;
 }

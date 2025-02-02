@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./slides.css">
     <script src="./slides.js" defer></script>
+    <script src="./audio.js" defer></script>
   </head>
   <body>
     <h1>Browsercast</h1>
@@ -17,11 +18,6 @@
     <p>
       A simple tool for narrating presentations.
     </p>
-    <!-- <audio controls=true> -->
-    <audio>
-        <source src="one.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
     <ul>
       <li>Press the play button above to enable audio replay</li>
       <li>Then click anywhere else on the slide…</li>
@@ -29,6 +25,9 @@
       <li>The audio clips on subsequent slides should play automatically</li>
     </ul>
 
+    <div class="controls-container">
+      <audio-controls src="one.mp3"></audio-controls>
+    </div>
     <hr/>
 
     <h2>The Problem</h2>
@@ -36,10 +35,10 @@
       <li>Screencasts aren't text: they're pixels in the shape of text</li>
       <li>So they're not searchable, accessible, linkable, or styleable</li>
     </ul>
-    <audio>
-        <source src="two.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+
+    <div class="controls-container">
+      <audio-controls src="two.mp3"></audio-controls>
+    </div>
 
     <hr/>
 
@@ -57,10 +56,9 @@
 	</ul>
       </li>
     </ul>
-    <audio>
-        <source src="three.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <div class="controls-container">
+      <audio-controls src="three.mp3"></audio-controls>
+    </div>
 
   </body>
 </html>
