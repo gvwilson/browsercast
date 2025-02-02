@@ -32,9 +32,16 @@ function createThumbnails() {
         // screenshot of each slides 
         const thumbnail = doc.createElement('img');
 
-        html2canvas(slide).then(canvas => {
+        html2canvas(slide, {
+            // to prevent allow Taint error
+            useCORS: true,
+            allowTaint: true,
+            } 
+        ).then(canvas => {
             thumbnail.src = canvas.toDataURL('image/png');
         });
+
+
 
         thumbnail.classList.add('thumbnail');
         thumbnail.setAttribute('id', `thumbnail-${i + 1}`); 
