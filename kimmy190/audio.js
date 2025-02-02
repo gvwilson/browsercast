@@ -9,9 +9,8 @@ function audioBarFeature(){
         const audio = slide.querySelector('audio');
         if (audio === null){
             return;
-        } else {
-            audio.play(); 
-        }
+        } 
+        
         const playPauseBtn = slide.querySelector('.playPauseBtn');
         const timeDisplay = slide.querySelector('.timeDisplay');
         const seekBar = slide.querySelector('.seekBar');
