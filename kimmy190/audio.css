@@ -1,0 +1,69 @@
+/* custom audio playback bar */
+.audio-bar-container{
+    display: flex;
+    justify-content: center; 
+}
+
+.audio-player {
+    display: flex;
+    align-items: center;
+
+    width: 95%;
+    gap: 15px; 
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+
+    position: absolute;
+    bottom: 30px;
+}
+
+.seekBar {
+    flex: 1;
+    cursor: pointer;
+}
+
+#volumeBtn{
+    position: relative;
+}
+
+.volumeControl {
+    width: 100px;
+    cursor: pointer;
+    position: absolute;
+    /* make the volume control bar to show upwards */
+    rotate: 270deg;
+    right: 28px;
+    bottom: 90px;
+}
+
+.playbackSpeed {
+    appearance: none;
+    border: none; 
+    background-color: #f5f5f5;
+    /* outline: none; */
+
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    font-size: medium;
+}
+
+.timeDisplay{
+    font-size: medium;
+}
+
+.hidden {
+    display: none;
+}
+
+.pointer{
+    cursor: pointer; 
+}
+
+.forward, .backword{
+    width: 23px;
+}
+
+.caption{
+    width: 1.7rem;
+}

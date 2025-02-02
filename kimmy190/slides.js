@@ -78,12 +78,26 @@
     // Update URL to reflect current slide.
     function addSlideObserver(slide) {
 	// slide === entries[0] in the handler below
-    // deleted the audio to prevent autoplay 
+    // deleted the audio to prevent autoplay  
+
 	function obs(entries, observer) {
 	    if (entries[0].isIntersecting) {
 		window.location.hash = slide.getAttribute('id');
 		console.log(`slide ${slide.getAttribute('id')} enter`);
 		audio = slide.querySelector('audio');
+        // enable autoplay
+        if (audio) {
+		audio.play(); 
+		// to ensure the play logo changes as audio states changes 
+		const playPauseBtn = slide.querySelector('.playPauseBtn');
+		audio.addEventListener('play', function() {
+			playPauseBtn.className = 'fa-solid fa-pause pointer';
+		});
+		// When the audio is paused, update the button
+		audio.addEventListener('pause', function() {
+		playPauseBtn.className = 'fa-solid fa-play pointer';
+		    });
+		}
 	    }
 	    else {
 		console.log(`slide ${slide.getAttribute('id')} exit`);
@@ -150,7 +164,9 @@
         if (!createSlides()) {
             return;
         }
-        decorateSlides();
+        decorateSlides(); 
+        
+        newAudioBar(); 
         
         // press 'f' for fullscreen mode and 'o' for overview
         // navigate to each slide by clicking its slide number 
