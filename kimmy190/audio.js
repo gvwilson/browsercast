@@ -10,7 +10,6 @@ function audioBarFeature(){
         if (audio === null){
             return;
         } 
-        
         const playPauseBtn = slide.querySelector('.playPauseBtn');
         const timeDisplay = slide.querySelector('.timeDisplay');
         const seekBar = slide.querySelector('.seekBar');
@@ -20,15 +19,6 @@ function audioBarFeature(){
         const forwordBtn = slide.querySelector('.forward');
         const backwardBtn = slide.querySelector('.backword');
         const captionBtn = slide.querySelector('.caption')
-
-        // change the play button when audio is playing 
-        if (audio.paused) {
-            console.log(audio.paused); 
-            playPauseBtn.className = 'fa-solid fa-play pointer';
-        } else {
-            console.log("playing")
-            playPauseBtn.className = 'fa-solid fa-pause pointer';
-        }
 
         // play/pause functionality
         playPauseBtn.addEventListener('click', () => {
@@ -69,7 +59,7 @@ function audioBarFeature(){
 
         // toggle volume slider on hover
         volumeBtn.addEventListener('mouseover', () => {
-            volumeControl.classList.toggle('hidden');
+        volumeControl.classList.toggle('hidden');
         });
 
         // hide the slider when clicking outside
@@ -100,8 +90,7 @@ function audioBarFeature(){
         })
 
         // change the caption icon when click 
-        captionBtn.addEventListener('click', ()=>{
-            // using data next method to switch attributes 
+        captionBtn.addEventListener('click', ()=>{ 
             const currSrc = captionBtn.src; 
             const nextSrc = captionBtn.getAttribute("data-next");
 

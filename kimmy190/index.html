@@ -6,12 +6,22 @@
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./slides.css">
     <link rel="stylesheet" href="./audio.css">
+    <link rel="stylesheet" href="./preview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="./audio.js" defer></script>
     <script src="./slides.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="./preview.js" defer></script>
+
   </head>
   <body>
-    preview 
+
+    <div class="preview-all">
+        <img src="./images/right-arrow.png" class="right-arrow pointer" alt="arrow icon">
+        <div class="preview-slider hidden">
+        </div>
+    </div>
+
     <h1>Browsercast</h1>
     <p>
       A simple tool for narrating presentations.
@@ -55,6 +65,7 @@
 	  <li>Clips are replayed when slides are revisited</li>
 	  <li>Overflow isn't handled gracefully</li>
 	  <li>We don't handle captioning or internationalization</li>
+
 	</ul>
       </li>
     </ul>
@@ -72,6 +83,11 @@
         <source src="sample.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <hr>
+
+    <h2>Slide 6</h2>
+    <p>additional context</p>
 
   </body>
 </html>

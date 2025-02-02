@@ -1,0 +1,55 @@
+.right-arrow{
+    width:22px;
+    position: fixed; 
+    bottom:1rem;
+    left:1rem;
+}
+
+.preview-slider {
+    position: fixed;
+    top:0;
+    bottom: 3rem;
+    left: 0;
+    width: 16%;
+    /* height: 100%; */
+    overflow-y: scroll;
+    background-color: #f5f5f5;
+    padding: 1rem;
+    align-items: center;
+}
+
+.thumbnail-wrap{
+    display: flex;
+    flex-direction: row;
+}   
+
+.thumbnail-number{
+    margin-right: 0.5em;
+    font-size: 20px;
+}
+
+.thumbnail {
+    width: 95%;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: white;
+    aspect-ratio: 1.5 / 1;
+    position: relative;
+}
+
+.thumbnail:hover{
+    border: 2px solid grey; 
+    border-radius: 8px;
+}
+
+.thumbnail.highlight {
+    border: 2px solid #1240FA; /* Highlight style */
+    border-radius: 8px;
+}
+
+button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
