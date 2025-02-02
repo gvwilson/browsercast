@@ -86,9 +86,18 @@
 		console.log(`slide ${slide.getAttribute('id')} enter`);
 		audio = slide.querySelector('audio');
         // enable autoplay
-        // if (audio) {
-		//     audio.play(); 
-		// }
+        if (audio) {
+		audio.play(); 
+		// to ensure the play logo changes as audio states changes 
+		const playPauseBtn = slide.querySelector('.playPauseBtn');
+		audio.addEventListener('play', function() {
+			playPauseBtn.className = 'fa-solid fa-pause pointer';
+		});
+		// When the audio is paused, update the button
+		audio.addEventListener('pause', function() {
+		playPauseBtn.className = 'fa-solid fa-play pointer';
+		    });
+		}
 	    }
 	    else {
 		console.log(`slide ${slide.getAttribute('id')} exit`);
