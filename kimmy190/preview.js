@@ -52,7 +52,7 @@ function navigateToSlide(slideNumber) {
     const targetSlide = document.getElementById(`thumbnail-${slideNumber}`);
     if (targetSlide) {
         window.location.hash = `slide-${slideNumber}`;
-        // targetSlide.scrollIntoView();
+        targetSlide.scrollIntoView();
     }
 }
 
