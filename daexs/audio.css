@@ -23,6 +23,7 @@
     appearance: none;
     border: none;
     overflow: hidden;
+    cursor: pointer;
 }
 
 #playBtn.playing {
@@ -119,6 +120,7 @@
     height: 25px;
     background: url("images/forward.png") 0 center no-repeat;
     background-size: contain;
+    cursor: pointer;
 }
 
 .rewind-btn {
@@ -126,6 +128,7 @@
     height: 25px;
     background: url("images/backword.png") 0 center no-repeat;
     background-size: contain;
+    cursor: pointer;
 }
 
 select {

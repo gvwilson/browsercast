@@ -167,10 +167,6 @@ const audioState = {};
         });
     }
 
-    // function decorateAudioBar() {
-    //     const controls = doc.querySelectorAll('div.slide.')
-    // }
-
     // set up and run
     function main(doc) {
         page.classList.add('slide-container');
@@ -183,15 +179,6 @@ const audioState = {};
         // Scroll to next slide from start slide
         const startButton = doc.getElementById('start');
         startButton.addEventListener('click', () => {
-            // Initialize audio contexts after user interaction
-            // if (!isAudioInitialized) {
-            //     const audioElements = doc.querySelectorAll('audio-controls');
-            //     audioElements.forEach(audioControls => {
-            //         audioControls.audioInit();
-            //     })
-            //     isAudioInitialized = true;
-            // }
-
             const slides = doc.querySelectorAll('div.slide');
             slides[1].scrollIntoView({
                 behavior: 'smooth',
