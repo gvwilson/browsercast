@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./slides.css">
+    <script src="./slides.js" defer></script>
+    <script src="./audio.js" defer></script>
+    <script src="./navigation.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div id="slide-navigation-container"> 
+      <slide-nav></slide-nav>
+    </div>
+
+    <hr/>
+
+    <h1>What is it?</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+    <ul>
+      <li>Press the play button above to enable audio replay</li>
+      <li>Then click anywhere else on the slide…</li>
+      <li>…and press the down arrow key to advance</li>
+      <li>The audio clips on subsequent slides should play automatically</li>
+    </ul>
+
+    <div class="controls-container">
+      <audio-controls src="audio/one.mp3"></audio-controls>
+    </div>
+    <hr/>
+
+    <h2>The Problem</h2>
+    <ul>
+      <li>Screencasts aren't text: they're pixels in the shape of text</li>
+      <li>So they're not searchable, accessible, linkable, or styleable</li>
+    </ul>
+
+    <div class="controls-container">
+      <audio-controls src="audio/two.mp3"></audio-controls>
+    </div>
+
+    <hr/>
+
+    <h3>The Solution (and Problems)</h3>
+    <ul>
+      <li>Browsercast plays short snippets of audio as slides progress</li>
+      <li>Uses <a href="https://yihui.org/en/2023/09/snap-slides/">snap-scroll</a></li>
+      <li>But:
+	<ul>
+	  <li>Users must press "play" on the first slide to give permission</li>
+	  <li>Each slide's audio must be in a separate file</li>
+	  <li>Clips are replayed when slides are revisited</li>
+	  <li>Overflow isn't handled gracefully</li>
+	  <li>We don't handle captioning or internationalization</li>
+	</ul>
+      </li>
+    </ul>
+    <div class="controls-container">
+      <audio-controls src="audio/three.mp3"></audio-controls>
+    </div>
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+
+    <hr/>
+
+    <h1>Browsercast</h1>
+    <p>
+      A simple tool for narrating presentations.
+    </p>
+
+  </body>
+</html>
