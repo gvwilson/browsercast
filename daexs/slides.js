@@ -39,6 +39,12 @@ const audioState = {};
     // Create slides from content.
     function createSlides() {
         let el = page.firstElementChild;
+
+        // Skip sidebar
+        while (el && el.id === 'slide-navigation-container'){
+            el = el.nextElementSibling;
+        }
+        
         // no slides
         if (!el) {
             return false;
