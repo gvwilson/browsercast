@@ -41,7 +41,7 @@
 .thumbnail {
     cursor: pointer;
     background-color: white;
-    aspect-ratio: 1.1 / 1;
+    aspect-ratio: 6/ 4;
     position: relative;
     transform-origin: top left;
     /* min-height: 100vh; */
