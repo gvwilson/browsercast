@@ -181,16 +181,6 @@ const audioState = {};
         }
         decorateSlides();
         initAudioState();
-
-        // Scroll to next slide from start slide
-        const startButton = doc.getElementById('start');
-        startButton.addEventListener('click', () => {
-            const slides = doc.querySelectorAll('div.slide');
-            slides[1].scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            })
-        });
         
         // press 'f' for fullscreen mode and 'o' for overview
         doc.addEventListener('keyup', (evt) => {
