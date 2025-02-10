@@ -23,7 +23,6 @@
 .thumbnail-wrap{
     display: flex;
     justify-content: flex-start;
-    align-content: space-between;
     width: 95%;
     max-height: 200px;
     /* margin-bottom: 10px; */
@@ -35,8 +34,8 @@
     font-size: medium;
     font-weight: bold;
     color: gray;
-    text-align: end;
     margin-top: 5px;
+    width: 10px;
 }
 
 .thumbnail {
@@ -47,7 +46,7 @@
     transform-origin: top left;
     /* min-height: 100vh; */
     height: 900px;
-    margin-left: 10px;
+    margin-left: 20px;
     padding-left: 30px;
 }
 
