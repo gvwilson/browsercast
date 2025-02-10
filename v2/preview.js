@@ -85,6 +85,7 @@ function highlightCurrentSlide() {
                     if(thumbnails[index]){
                         thumbnails[index].classList.add('highlight');
                         thumbnails[index].scrollIntoView();
+                        previewSlider.scrollTop -= 20;
                     }
                 } else {
                     if(thumbnails[index]){
