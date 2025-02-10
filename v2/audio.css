@@ -1,0 +1,143 @@
+/* References https://github.com/beforesemicolon/BFS-Projects/tree/audio-player-tag */
+
+.audio-bar {
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    width: 90%;
+    gap: 15px;
+}
+
+#playBtn, .volume-bar {
+    width: 35px;
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+}
+
+#playBtn{
+    text-indent: -9999px;
+    background: url("images/audio-icons-blk.png") 0% center/500% 100% no-repeat;
+    appearance: none;
+    border: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#playBtn.playing {
+    background: url("images/audio-icons-blk.png") 25% center/500% 100% no-repeat;
+}
+
+.volume-bar {
+    background: url("images/audio-icons-blk.png") 100% center/500% 100% no-repeat;
+    position:relative;
+}
+
+.volume-slider {
+    display: none;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-550%) translateX(66%) rotate(270deg);  
+    transform-origin: center;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.volume-bar:hover .volume-slider {
+    display: block;
+}
+
+.progress-indicator {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
+.duration, .current-time {
+    position: relative;
+    z-index: 0;
+    color: #000000;
+    font-size: 73%;
+}
+
+.duration {
+    margin-left: 2px;
+    margin-right: 5px;
+}
+
+.duration::before {
+    content: '/';
+    color: #000000;
+    display: inline-block;
+    margin-right: 2px;
+}
+
+.progress-bar {
+    position: absolute;
+    width: 82%;
+    height: 100%;
+    overflow: hidden;
+    transform: translateX(-21%);
+}
+
+.captions {
+    width: 30px;
+    height: 30px;
+    background: url("images/cc.png") 0 center no-repeat;
+    background-size: contain; 
+    background-position: center; 
+    cursor: pointer;
+}
+
+.speed-adjust {
+    width: 50px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 2px;
+}
+
+.current-speed {
+    position: relative;
+    text-align: center;
+    box-shadow: none;
+    outline: none;
+    border-width: 0;
+    background: none;
+    color: #000000;
+    font-size: 70%;
+    font-weight: bold;
+}
+
+.forward-btn {
+    width: 25px;
+    height: 25px;
+    background: url("images/forward.png") 0 center no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.rewind-btn {
+    width: 25px;
+    height: 25px;
+    background: url("images/backword.png") 0 center no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+select {
+    border-width: 0;
+    -webkit-appearance: none; /* Chrome/Safari */
+    -moz-appearance: none; /* Firefox */
+    appearance: none;
+    background-color: #f5f5f5;
+    font-size: 70%;
+    font-weight: bold;
+    text-align: center;
+}
