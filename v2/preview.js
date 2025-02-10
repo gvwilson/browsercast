@@ -84,6 +84,7 @@ function highlightCurrentSlide() {
                 if (entry.isIntersecting) {
                     if(thumbnails[index]){
                         thumbnails[index].classList.add('highlight');
+                        thumbnails[index].scrollIntoView();
                     }
                 } else {
                     if(thumbnails[index]){
