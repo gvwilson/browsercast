@@ -100,7 +100,7 @@ const audioState = {};
                     audio.play();
                     audioState[slideId] = true;
                 } else {
-                    console.log('Audio already played before.')
+                    console.log('Audio already played before.');
                 }
             }
         }
