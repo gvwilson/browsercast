@@ -1,9 +1,9 @@
-.right-arrow{
+/* .right-arrow{
     width:22px;
     position: fixed; 
     bottom:1rem;
     left:1rem;
-}
+} */
 
 .preview-slider {
     position: fixed;
@@ -16,6 +16,7 @@
     background-color: #f5f5f5;
     padding-left: 1rem;
     align-items: center;
+    transition: .4s;
     z-index: 1000;
 }
 
@@ -60,23 +61,25 @@
     border-radius: 8px;
 }
 
-button {
+/* button {
     position: fixed;
     top: 10px;
     left: 10px;
     z-index: 1000;
-}
+} */
 
  .toggle-btn {
     position: fixed;
     top: 30px;
     left: 10px;
-    z-index: 9999999999;
-    transition: .4s;
+    z-index: 1000;
+    transition: left .4s;
+    transform: scaleX(1);
 }
 
 #toggle.open {
     left: 335px;
+    transform: scaleX(-1);
 }
 
 .preview-slider.open {
