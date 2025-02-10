@@ -18,7 +18,6 @@
     justify-content: flex-start;
     width: 95%;
     max-height: 200px;
-    /* margin-bottom: 10px; */
     margin-top: 20px;
 }   
 
@@ -48,7 +47,7 @@
 }
 
 .thumbnail.highlight {
-    border: 3px solid #1240FA; /* Highlight style */
+    border: 3px solid #1240FA; 
     border-radius: 8px;
 }
 
