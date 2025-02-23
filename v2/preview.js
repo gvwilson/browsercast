@@ -40,10 +40,13 @@ function createThumbnails() {
         // Uses HTML cloning and scaling inspired from https://github.com/gnab/remark
         const thumbnail = document.createElement('div');
         const slideClone = document.createDocumentFragment();
+        let audioExists = 0;
  
         Array.from(slide.children).forEach(child => {
             if (!(child.closest('.controls-container') || child.closest('.page-num'))){
                 slideClone.appendChild(child.cloneNode(true));
+            } else if (child.closest('.controls-container')) {
+                audioExists = 1;
             }
         });
 
@@ -61,6 +64,15 @@ function createThumbnails() {
 
         scaleDiv(thumbnail, previewSlider); 
         window.addEventListener('resize', scaleDiv(thumbnail, thumbnailWrap));
+
+        // Add audio icon if audio exists on slide
+        if (audioExists == 1){
+            const audioIcon = document.createElement('div');
+            audioIcon.setAttribute('alt', 'Audio available on this slide.');
+            audioIcon.setAttribute('class', "audio-icon");
+
+            thumbnailWrap.appendChild(audioIcon);
+        }
     });
 }
 

@@ -20,6 +20,7 @@
     width: 95%;
     max-height: 200px;
     margin-top: 20px;
+    position: relative;
 }   
 
 
@@ -82,4 +83,13 @@
     cursor: pointer;
 }
 
-
+.audio-icon {
+    width: 20px;
+    height: 20px;
+    background: url("images/audio-icons-blk.png") 100% center/500% 100% no-repeat;
+    position: absolute;
+    z-index: 9999999;
+    bottom: 0;
+    margin-bottom: 5px;
+    left: 85%;
+}
