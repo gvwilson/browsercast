@@ -85,9 +85,12 @@ function highlightCurrentSlide() {
                     if(thumbnails[index]){
                         thumbnails[index].classList.add('highlight');
                         thumbnails[index].scrollIntoView();
-                        if (index != slides.length - 1){
-                            previewSlider.scrollTop -= 20;
-                        }
+                        setTimeout(() => {
+                            thumbnails[index].scrollIntoView();
+                            if (index != slides.length - 1){
+                                previewSlider.scrollTop -= 20;
+                            }
+                        }, 50);
                     }
                 } else {
                     if(thumbnails[index]){
