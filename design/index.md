@@ -62,3 +62,26 @@ Feedback from friends F1 F2, F3, F4, & F5
 
 - All thought it was a good feature
 - All clearly understood what the purpose is
+
+
+
+We found the need to distinguish the experience into two modes: the presenter mode (with full controls visible) and the viewer mode (passive viewing). 
+
+Feedback:
+- In viewing mode, there should be a call to action and the ability to stop/pause
+- When in viewing mode, the user still needs to have the ability to go back to previous slides. Therefore, they still need some control
+- Ideas suggesting mimicking a video playing were suggested
+- Potential consideration: have the audio remember where it was last stopped so when the user comes back, it continues rather than start over.
+
+**Feature #4.5 : Presenter and Viewer Modes (expands on the autoplay)**
+
+![](feature4.5-desktop.jpg "Feature 4.5 Desktop Version")
+
+![](feature4.5-mobile.png "Feature 4.5 Mobile Version")
+
+Details:
+- "autoplay" becomes the toggle to transition into "viewing mode" when turned on.
+- When autoplay is turned on, everything but the slides themselves (and the autoplay button) is hidden from view. Audio continues to autoplay in the background.
+- User can still pause or use keyboard shortcuts to navigate between slides. When they do so and autoplay is on, the controls come into view.
+- Controls only stay in view if the user pauses while on autoplay.
+- Turning off autoplay brings controls back and into "presenter mode"
