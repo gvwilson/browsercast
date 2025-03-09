@@ -1,6 +1,6 @@
 const slideNavBar = document.querySelector('#slide-navigation-container');
 const audioBars = document.querySelectorAll('audio-controls');
-const toggleBtn = document.querySelector('.slider');
+const toggleSliderBtn = document.querySelector('.slider');
 let visibleState = 1; // 1 means it is visible
 
 function hideAudioBars() {
@@ -18,14 +18,28 @@ function hideAudioBars() {
     });
 }
 
+function closeSlideNav(){
+    const previewSlider = document.querySelector('.preview-slider');
+    const toggleBtn = document.getElementById('toggle');
+    
+    if (!previewSlider.classList.contains('open')){
+        previewSlider.classList.toggle('open');
+        toggleBtn.classList.toggle('open');
+    }
+}
+
 function addEventListeners () {
-    toggleBtn.addEventListener('click', () => {
+    toggleSliderBtn.addEventListener('click', () => {
         if (visibleState) {
-            slideNavBar.classList.add('hide');
-            if (audioBars.length > 0){
-                hideAudioBars();
-            }
-            visibleState = 0;
+            closeSlideNav();
+
+            setTimeout(() => {
+                slideNavBar.classList.add('hide');
+                if (audioBars.length > 0){
+                    hideAudioBars();
+                }
+                visibleState = 0;
+            }, 500);
         } else {
             slideNavBar.classList.remove('hide');
             if (audioBars.length > 0){

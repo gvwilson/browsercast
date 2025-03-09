@@ -121,6 +121,7 @@ function init() {
     toggleBtn = document.getElementById('toggle');
     toggleBtn.addEventListener('click', () => {
         previewSlider.classList.toggle('open');
+        console.log(toggleBtn);
         toggleBtn.classList.toggle('open');
     });
 }
