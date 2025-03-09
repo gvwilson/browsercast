@@ -22,7 +22,9 @@
                     // make sure the audio is ready to be played 
                     console.log(this.audio.readyState);
                     if (this.audio.readyState < 3) {
-                        // forces reloading the buffer when audio is 
+                        // forces reloading the audio when it is not sufficiently loaded 
+                        // (readyState < 3 means it hasn't buffered enough to play)
+
                         this.audio.load(); 
                         this.audio.addEventListener("canplay", () => {
                             // playback starts only when enough data is available after a manual reload
