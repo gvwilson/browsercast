@@ -1,0 +1,59 @@
+.autoplay-btn {
+    position: fixed;
+    top: 30px;
+    right: 3%;
+    z-index: 99999;
+    cursor: pointer;
+}
+
+.autoplay-btn input {
+    display: none;
+}
+
+.slider {
+    position: relative;
+    cursor: pointer;
+    background-color: rgb(61, 61, 61);
+    transition: 0.4s;
+    border-radius: 34px;
+    width: 54px;
+    height: 28px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "Off";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #FFF;
+    transition: 0.4s;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    color: #9a9a9a;
+  }
+  
+  input:checked ~ .slider {
+    background-color: rgb(47, 106, 255);
+  }
+  
+  input:checked ~ .slider:before {
+    transform: translateX(26px);
+    content: "On"
+  }
+
+  .autoplay-btn-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .autoplay-text {
+    margin-right: 10px;
+    font-size: 24px;
+    color: rgb(36, 36, 36);
+  }
+  
