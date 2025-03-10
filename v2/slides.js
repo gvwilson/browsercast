@@ -91,6 +91,13 @@ const audioState = {};
 	    if (entries[0].isIntersecting) {
 		window.location.hash = slideId;
 		console.log(`slide ${slideId} enter`);
+
+        // Remove "active" class from all slides
+        document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+
+        // add "active" class to the current slide
+        slide.classList.add('active'); 
+
 		audioControls = slide.querySelector('audio-controls'); 
         if (audioControls){
             audio = audioControls.shadowRoot.querySelector('audio');
