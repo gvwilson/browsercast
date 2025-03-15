@@ -46,9 +46,8 @@ function hideControls() {
     }
 }
 
-
 function handleMouseMove() {
-    // when hovering over the screen make controls visible and hide after 3 seconds 
+    // when autoplay is on and hover over the screen, make controls visible and hide after 3 seconds 
     if (autoplayEnabled) {
         console.log("should only work when autoplay is on,  " + autoplayEnabled); 
         showControls();
@@ -80,7 +79,12 @@ function handleMouseMove() {
                 }, 3000);
             }
 
+        } else {
+            hideControlsTimeout = setTimeout(() => {
+                    hideControls();
+            }, 3000);
         }
+
     }
 }
 
