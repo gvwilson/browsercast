@@ -46,6 +46,7 @@ function hideControls() {
     }
 }
 
+
 function handleMouseMove() {
     // when autoplay is on and hover over the screen, make controls visible and hide after 3 seconds 
     if (autoplayEnabled) {
@@ -59,15 +60,7 @@ function handleMouseMove() {
 
         if (audioPlayer) {
             const audioElement = audioPlayer.shadowRoot.querySelector('audio'); 
-            console.log(audioElement)
 
-            // when audio is ended controls remain visible 
-            audioElement.addEventListener('ended', () => {
-                showControls(); 
-                clearTimeout(hideControlsTimeout); 
-            });
-
-             // when audio is paused controls remain visible 
             audioElement.addEventListener('pause', () => {
                 showControls();
                 clearTimeout(hideControlsTimeout);
@@ -88,13 +81,10 @@ function handleMouseMove() {
     }
 }
 
-
 function addEventListeners () {
     toggleSliderBtn.addEventListener('click', () => {
         if (!autoplayEnabled) {
             // hiding all features 
-            console.log("hiding controls cuz autoplay is on"); 
-            
             closeSlideNav();
 
             setTimeout(() => {
@@ -108,18 +98,24 @@ function addEventListeners () {
 
         } else {
             // controls visible    
-            console.log("showing controls when autoplay is off")
+            // console.log("showing controls when autoplay is off")
             clearTimeout(hideControlsTimeout); 
             slideNavBar.classList.remove('hide');
             if (audioBars.length > 0){
                 hideAudioBars(0);
             }
-            // visibleState = 1;
             autoplayEnabled = false; 
-            console.log("making sure autoplay is turned off??" + autoplayEnabled);
+            // console.log("making sure autoplay is turned off??" + autoplayEnabled);
         }
     });
 
+    // showing controls when audio is ended 
+    document.addEventListener('AudioEnded', () => {
+        showControls();
+        clearTimeout(hideControlsTimeout); 
+    });
+
+    // hover effect when controlling slides with mouse 
     document.addEventListener('mousemove', handleMouseMove);
 }
 
