@@ -40,6 +40,8 @@
                 console.log("Audio ended.");
                 this.playBtn.textContent = 'Play';
                 this.playBtn.classList.remove('playing');
+                // fire a new event that shows control when audio ended
+                document.dispatchEvent(new Event('AudioEnded'));
             });
 
             this.audio.addEventListener('loadedmetadata', () => {;
