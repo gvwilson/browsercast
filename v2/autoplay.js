@@ -1,6 +1,7 @@
 const slideNavBar = document.querySelector('#slide-navigation-container');
 const audioBars = document.querySelectorAll('audio-controls');
 const toggleSliderBtn = document.querySelector('.slider');
+let isAudioManuallyPaused = false 
 
 // let visibleState = 1; // 1 means it is visible
 let autoplayEnabled = false; // autoplay is off 
@@ -62,19 +63,24 @@ function handleMouseMove() {
             const audioElement = audioPlayer.shadowRoot.querySelector('audio'); 
 
             audioElement.addEventListener('pause', () => {
-                showControls();
-                clearTimeout(hideControlsTimeout);
+                if(isAudioManuallyPaused){
+                    // show controls when audio is manually paused 
+                    showControls();
+                    clearTimeout(hideControlsTimeout);
+                    console.log("it still shows the controsl");
+                } 
             });
 
-            if (!audioElement.paused) {
+            if (audioElement.play) {
                 hideControlsTimeout = setTimeout(() => {
                     hideControls();
                 }, 3000);
             }
 
         } else {
+            // when slide has no audio 
             hideControlsTimeout = setTimeout(() => {
-                    hideControls();
+                hideControls();
             }, 3000);
         }
 
@@ -98,21 +104,13 @@ function addEventListeners () {
 
         } else {
             // controls visible    
-            // console.log("showing controls when autoplay is off")
             clearTimeout(hideControlsTimeout); 
             slideNavBar.classList.remove('hide');
             if (audioBars.length > 0){
                 hideAudioBars(0);
             }
             autoplayEnabled = false; 
-            // console.log("making sure autoplay is turned off??" + autoplayEnabled);
         }
-    });
-
-    // showing controls when audio is ended 
-    document.addEventListener('AudioEnded', () => {
-        showControls();
-        clearTimeout(hideControlsTimeout); 
     });
 
     // hover effect when controlling slides with mouse 

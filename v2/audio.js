@@ -33,6 +33,7 @@
 
             this.audio.addEventListener('pause', () => {
                 this.playBtn.classList.remove('playing');
+                isAudioManuallyPaused = true 
             });
 
             this.audio.addEventListener('ended', () => {
@@ -40,8 +41,7 @@
                 console.log("Audio ended.");
                 this.playBtn.textContent = 'Play';
                 this.playBtn.classList.remove('playing');
-                // fire a new event that shows control when audio ended
-                document.dispatchEvent(new Event('AudioEnded'));
+                isAudioManuallyPaused = false 
             });
 
             this.audio.addEventListener('loadedmetadata', () => {;
