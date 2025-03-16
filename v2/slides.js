@@ -1,6 +1,5 @@
 // Inspired by https://yihui.org/en/2023/09/snap-slides/
 const audioState = {};
- isAudioInitialized = false;
 
 (function(doc) {
     let page = doc.body;  // <body> is container of slides
@@ -104,13 +103,14 @@ const audioState = {};
             if (audioControls){
                 audio = audioControls.shadowRoot.querySelector('audio');
                 if (audio) {
+                    audio.play();
                     // Check if audio has been played before
-                    if (!audioState[slideId]){
-                        audio.play();
-                        audioState[slideId] = true;
-                    } else {
-                        console.log('Audio already played before.');
-                    }
+                    // if (!audioState[slideId]){
+                    //     audio.play();
+                    //     audioState[slideId] = true;
+                    // } else {
+                    //     console.log('Audio already played before.');
+                    // }
                 }
             }
 	    }
