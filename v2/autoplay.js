@@ -116,21 +116,24 @@ async function autoScroll () {
             scrollTimeout = setTimeout(resolve, 3000);
         });
     }
+    
+    if (autoplayEnabled){ // Avoid scrolling even after disabled
+        const next = index + 1;
+        if (next < slides.length){
+            console.log("Scrolling...")
+            const nextSlide = slides[next];
+            const offset = nextSlide.offsetTop - 28;
 
-    // const next = index + 1;
-    // if (next < slides.length){
-    //     const nextSlide = slides[next];
-    //     const offset = nextSlide.offsetTop - 28;
-
-    //     window.scrollTo({
-    //         top: offset,
-    //         behavior: 'smooth',
-    //     });
-    // }
-    slides[index + 1].scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth',
+            });
+        }
+        // slides[index + 1].scrollIntoView({
+        //     behavior: 'smooth',
+        //     block: 'start'
+        // });
+    }
 
     if (index < slides.length - 1 && autoplayEnabled) {
         scrollTimeout = setTimeout(autoScroll, 3000);
