@@ -132,7 +132,7 @@ async function autoScroll () {
 
         setTimeout(() => {
             htmlElement.style.scrollSnapType = originalSnapType; // Restore the original snap type
-          }, 500);
+          }, 350);
 
     }
 
