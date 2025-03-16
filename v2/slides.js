@@ -103,14 +103,19 @@ const audioState = {};
             if (audioControls){
                 audio = audioControls.shadowRoot.querySelector('audio');
                 if (audio) {
-                    audio.play();
-                    // Check if audio has been played before
-                    // if (!audioState[slideId]){
-                    //     audio.play();
-                    //     audioState[slideId] = true;
-                    // } else {
-                    //     console.log('Audio already played before.');
-                    // }
+    
+                    if(autoplayEnabled){
+                        // only replay audio when autoplay is on 
+                        audio.play();
+                    } else {
+                        // Check if audio has been played before and play the audio once 
+                        if (!audioState[slideId]){
+                            audio.play();
+                            audioState[slideId] = true;
+                        } else {
+                            console.log('Audio already played before.');
+                        }
+                    }
                 }
             }
 	    }
