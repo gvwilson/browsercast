@@ -1,6 +1,8 @@
 const slideNavBar = document.querySelector('#slide-navigation-container');
 const audioBars = document.querySelectorAll('audio-controls');
 const toggleSliderBtn = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+let interval;
 
 // let visibleState = 1; // 1 means it is visible
 let autoplayEnabled = false; // autoplay is off 
@@ -81,6 +83,25 @@ function handleMouseMove() {
     }
 }
 
+async function autoScroll () {
+    // 1. Play audio if exists, if not, wait a fixed interval (ie. 5 secs) and scroll to next
+    // 2. Repeat until end reached
+
+    // Get current slide
+    const curr = document.querySelector('.active');
+    const index = Array.from(slides).indexOf(curr);
+
+    if (index < slides.length - 1) {
+        slides[index + 1].scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    } else {
+        clearInterval(interval);
+    }
+
+}
+
 function addEventListeners () {
     toggleSliderBtn.addEventListener('click', () => {
         if (!autoplayEnabled) {
@@ -96,6 +117,10 @@ function addEventListeners () {
             }, 500);
             autoplayEnabled = true; 
 
+            setTimeout(() => {
+                interval = setInterval(autoScroll, 3000);
+            }, 3000);
+
         } else {
             // controls visible    
             // console.log("showing controls when autoplay is off")
@@ -105,6 +130,7 @@ function addEventListeners () {
                 hideAudioBars(0);
             }
             autoplayEnabled = false; 
+            clearInterval(interval);
             // console.log("making sure autoplay is turned off??" + autoplayEnabled);
         }
     });
