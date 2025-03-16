@@ -117,6 +117,16 @@ async function autoScroll () {
         });
     }
 
+    // const next = index + 1;
+    // if (next < slides.length){
+    //     const nextSlide = slides[next];
+    //     const offset = nextSlide.offsetTop - 28;
+
+    //     window.scrollTo({
+    //         top: offset,
+    //         behavior: 'smooth',
+    //     });
+    // }
     slides[index + 1].scrollIntoView({
         behavior: 'smooth',
         block: 'start'
@@ -144,6 +154,19 @@ function addEventListeners () {
                 // visibleState = 0;
             }, 500);
             autoplayEnabled = true; 
+
+            // Play audio if paused
+            const curr = document.querySelector('.active');
+            const currAudio = curr.querySelector('audio-controls');
+
+            if (currAudio) {
+                const shadowRoot = currAudio.shadowRoot;
+                const content = shadowRoot.querySelector('audio');
+                if (content.paused){
+                    content.play();
+                }
+            }
+
 
             setTimeout(() => {
                 autoScroll();
