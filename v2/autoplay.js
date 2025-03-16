@@ -117,22 +117,23 @@ async function autoScroll () {
         });
     }
     
-    if (autoplayEnabled){ // Avoid scrolling even after disabled
-        const next = index + 1;
-        if (next < slides.length){
-            console.log("Scrolling...")
-            const nextSlide = slides[next];
-            const offset = nextSlide.offsetTop - 28;
+    if (autoplayEnabled && index + 1 < slides.length){ // Avoid scrolling even after disabled
+        const htmlElement = document.documentElement;
 
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth',
-            });
-        }
-        // slides[index + 1].scrollIntoView({
-        //     behavior: 'smooth',
-        //     block: 'start'
-        // });
+        // Temporarily disable scroll-snap-type 
+        const originalSnapType = htmlElement.style.scrollSnapType;
+        htmlElement.style.scrollSnapType = 'none';
+
+        console.log("Scrolling");
+        window.scroll({
+            top: slides[index + 1].offsetTop,
+            behavior: 'smooth' // This enables the smooth scroll effect
+        });
+
+        setTimeout(() => {
+            htmlElement.style.scrollSnapType = originalSnapType; // Restore the original snap type
+          }, 500);
+
     }
 
     if (index < slides.length - 1 && autoplayEnabled) {
