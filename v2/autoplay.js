@@ -2,7 +2,9 @@ const slideNavBar = document.querySelector('#slide-navigation-container');
 const audioBars = document.querySelectorAll('audio-controls');
 const toggleSliderBtn = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
-let interval;
+// let interval;
+let autoScrollState = 0;
+let scrollTimeout;
 
 // let visibleState = 1; // 1 means it is visible
 let autoplayEnabled = false; // autoplay is off 
@@ -83,6 +85,17 @@ function handleMouseMove() {
     }
 }
 
+function waitForAudio(currAudio) {
+    console.log(currAudio);
+    return new Promise (resolve => {
+        if (currAudio.ended) {
+            resolve();
+        } else {
+            currAudio.onended = resolve;
+        }
+    });
+}
+
 async function autoScroll () {
     // 1. Play audio if exists, if not, wait a fixed interval (ie. 5 secs) and scroll to next
     // 2. Repeat until end reached
@@ -91,13 +104,28 @@ async function autoScroll () {
     const curr = document.querySelector('.active');
     const index = Array.from(slides).indexOf(curr);
 
-    if (index < slides.length - 1) {
-        slides[index + 1].scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+    // Get current audio if exists
+    const currAudio = curr.querySelector('audio-controls');
+
+    if (currAudio) {
+        const shadowRoot = currAudio.shadowRoot;
+        const content = shadowRoot.querySelector('audio');
+        await waitForAudio(content);
     } else {
-        clearInterval(interval);
+        await new Promise(resolve => {
+            scrollTimeout = setTimeout(resolve, 3000);
+        });
+    }
+
+    slides[index + 1].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+
+    if (index < slides.length - 1 && autoplayEnabled) {
+        scrollTimeout = setTimeout(autoScroll, 3000);
+    } else {
+        console.log('Reached end.');
     }
 
 }
@@ -118,7 +146,7 @@ function addEventListeners () {
             autoplayEnabled = true; 
 
             setTimeout(() => {
-                interval = setInterval(autoScroll, 3000);
+                autoScroll();
             }, 3000);
 
         } else {
@@ -129,17 +157,17 @@ function addEventListeners () {
             if (audioBars.length > 0){
                 hideAudioBars(0);
             }
-            autoplayEnabled = false; 
-            clearInterval(interval);
+            autoplayEnabled = false;
+            clearTimeout(scrollTimeout); 
             // console.log("making sure autoplay is turned off??" + autoplayEnabled);
         }
     });
 
     // showing controls when audio is ended 
-    document.addEventListener('AudioEnded', () => {
-        showControls();
-        clearTimeout(hideControlsTimeout); 
-    });
+    // document.addEventListener('AudioEnded', () => {
+    //     showControls();
+    //     clearTimeout(hideControlsTimeout); 
+    // });
 
     // hover effect when controlling slides with mouse 
     document.addEventListener('mousemove', handleMouseMove);
