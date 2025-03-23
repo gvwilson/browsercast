@@ -129,6 +129,11 @@ function init() {
         previewSlider.classList.toggle('open');
         toggleBtn.classList.toggle('open');
     });
+
+    // Avoid propagating to scrolling event in main slides
+    previewAll.addEventListener('wheel', (evt) => {
+        evt.stopPropagation();
+    });
 }
 
 init();
