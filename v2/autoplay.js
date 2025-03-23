@@ -121,18 +121,20 @@ async function autoScroll () {
         const htmlElement = document.documentElement;
 
         // Temporarily disable scroll-snap-type 
-        const originalSnapType = htmlElement.style.scrollSnapType;
-        htmlElement.style.scrollSnapType = 'none';
+        // const originalSnapType = htmlElement.style.scrollSnapType;
+        // htmlElement.style.scrollSnapType = 'none';
 
         console.log("Scrolling");
-        window.scroll({
-            top: slides[index + 1].offsetTop,
-            behavior: 'smooth' // This enables the smooth scroll effect
-        });
+        // window.scroll({
+        //     top: slides[index + 1].offsetTop,
+        //     behavior: 'smooth' // This enables the smooth scroll effect
+        // });
+        slides[index].classList.remove('active');
+        slides[index + 1].classList.add('active');
 
-        setTimeout(() => {
-            htmlElement.style.scrollSnapType = originalSnapType; // Restore the original snap type
-          }, 350);
+        // setTimeout(() => {
+        //     htmlElement.style.scrollSnapType = originalSnapType; // Restore the original snap type
+        //   }, 350);
 
     }
 

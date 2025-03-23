@@ -81,7 +81,13 @@ function createThumbnails() {
 function navigateToSlide(slideNumber) {
     const targetSlide = document.getElementById(`thumbnail-${slideNumber}`);
     if (targetSlide) {
-        window.location.hash = `slide-${slideNumber}`;
+        // window.location.hash = `slide-${slideNumber}`;
+        const slides = document.querySelectorAll('.slide');
+        const curr = document.querySelector('.active');
+        const index = Array.from(slides).indexOf(curr);
+
+        slides[index].classList.remove('active');
+        slides[slideNumber - 1].classList.add('active'); // Numbers start from 1, indices start from 0
     }
 }
 

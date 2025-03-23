@@ -9,7 +9,12 @@
     padding: 0.5em;
     position: relative;
     min-height: 100vh;
-    scroll-snap-align: start;
+    display: none;
+    /* scroll-snap-align: start; */
+}
+
+.slide.active {
+    display: block; 
 }
 
 .slide > h2, .slide > h3 {
@@ -29,7 +34,7 @@
 
 .overview .slide {
     min-height: unset;
-    scroll-snap-align: unset;
+    /* scroll-snap-align: unset; */
 }
 
 .overview .slide-container {
@@ -44,9 +49,9 @@
     margin-bottom: 0.5em;
 }
 
-html {
+/* html {
     scroll-snap-type: y mandatory;
-}
+} */
 
 html:fullscreen::-webkit-scrollbar {
     display: none;

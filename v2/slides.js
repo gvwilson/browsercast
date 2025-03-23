@@ -1,5 +1,6 @@
 // Inspired by https://yihui.org/en/2023/09/snap-slides/
 const audioState = {};
+let isScrolling = false;
 
 (function(doc) {
     let page = doc.body;  // <body> is container of slides
@@ -195,17 +196,41 @@ const audioState = {};
         }
         decorateSlides();
         initAudioState();
+
+        const slides = document.querySelectorAll('.slide');
+        slides[0].classList.add('active');
+
+        // TODO: Handle Prolonged Keyboard Events
+        // TODO: Allow scrolling to trigger slide changes
         
         // press 'f' for fullscreen mode and 'o' for overview
         doc.addEventListener('keyup', (evt) => {
             if (evt.target !== doc.body) {
                 return;
             }
+            const slides = document.querySelectorAll('.slide');
+            const curr = document.querySelector('.active');
+            const index = Array.from(slides).indexOf(curr);
+
             if (evt.key === 'f') {
                 doc.documentElement.requestFullscreen();
             }
             else if (evt.key === 'o') {
                 doc.body.classList.toggle('overview');
+            } 
+            else if (evt.key === 'ArrowDown') {
+                evt.preventDefault();
+                if (index + 1 < slides.length){
+                    slides[index].classList.remove('active');
+                    slides[index + 1].classList.add('active');
+                }
+            }
+            else if (evt.key === 'ArrowUp'){
+                evt.preventDefault();
+                if (index - 1 >= 0){
+                    slides[index].classList.remove('active');
+                    slides[index - 1].classList.add('active');
+                }
             }
             sessionStorage.setItem('body-class', doc.body.className);
         });
