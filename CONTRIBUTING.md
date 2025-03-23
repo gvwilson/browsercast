@@ -146,6 +146,8 @@ be used for the same reason.
 
 [This example] uses [remark], an HTML slideshow framework, which inspired the thumbnails and slide navigation behaviour. 
 
+The audio playback bar makes use of [Shadow DOMs] to provide encapsulation from external CSS styling. The following [shadowroot documentation] may be helpful for understanding how to interact with the playback bar.
+
 
 ## How to Contribute
 
@@ -153,6 +155,8 @@ Issues and pull requests in [our GitHub repository][repo]
 are very welcome,
 particularly ones that address the user experience issues described above.
 
+[Shadow DOMs]: https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM
+[shadowroot documentation]: https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot
 [This example]: https://remarkjs.com/
 [repo]: https://github.com/gvwilson/browsercast
 [snap-scroll]: https://yihui.org/en/2023/09/snap-slides/
