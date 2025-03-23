@@ -146,7 +146,7 @@ be used for the same reason.
 
 [This example] uses [remark], an HTML slideshow framework, which inspired the thumbnails and slide navigation behaviour. 
 
-The audio playback bar makes use of [Shadow DOMs] to provide encapsulation from external CSS styling. The following [shadowroot documentation] may be helpful for understanding how to interact with the playback bar.
+The audio playback bar makes use of [shadow DOMs] to provide encapsulation from external CSS styling. The following [shadowroot documentation] may be helpful for understanding how to interact with the playback bar.
 
 
 ## How to Contribute
