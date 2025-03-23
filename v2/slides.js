@@ -200,11 +200,44 @@ let isScrolling = false;
         const slides = document.querySelectorAll('.slide');
         slides[0].classList.add('active');
 
-        // TODO: Handle Prolonged Keyboard Events
+        // doc.addEventListener('wheel', (e) => {
+        //     if (isScrolling) return; // Already scrolling
+
+        //     isScrolling = true;
+        //     const slides = document.querySelectorAll('.slide');
+        //     const curr = document.querySelector('.active');
+        //     const index = Array.from(slides).indexOf(curr);
+
+        //     // Check if the vertical scroll
+        //     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        //       if (e.deltaY > 0) {
+        //         // Scroll down
+        //         console.log("Scrolled Down");
+        //         // e.preventDefault();
+        //         if (index + 1 < slides.length){
+        //             slides[index].classList.remove('active');
+        //             slides[index + 1].classList.add('active');
+        //         }
+        //       } else {
+        //         // Scroll up
+        //         console.log("Scrolled Up");
+        //         // e.preventDefault();
+        //         if (index - 1 >= 0){
+        //             slides[index].classList.remove('active');
+        //             slides[index - 1].classList.add('active');
+        //         }
+        //       }
+        //     }
+
+        //     setTimeout(() => {
+        //         isScrolling = false;
+        //       }, 1500); // Limit frequency of scroll events 
+        //   });
+
         // TODO: Allow scrolling to trigger slide changes
-        
+
         // press 'f' for fullscreen mode and 'o' for overview
-        doc.addEventListener('keyup', (evt) => {
+        doc.addEventListener('keydown', (evt) => {
             if (evt.target !== doc.body) {
                 return;
             }
@@ -215,7 +248,7 @@ let isScrolling = false;
             if (evt.key === 'f') {
                 doc.documentElement.requestFullscreen();
             }
-            else if (evt.key === 'o') {
+            else if (evt.key === 'o') { // Overview feature no longer works with new slide configuration
                 doc.body.classList.toggle('overview');
             } 
             else if (evt.key === 'ArrowDown') {
