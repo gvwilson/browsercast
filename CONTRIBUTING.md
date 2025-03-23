@@ -33,7 +33,7 @@ proper handling (where "xxx.mp3" should be the actual audio file):
 
 ```
 <div class="controls-container">
-      <audio-controls src="xxx.mp3"></audio-controls>
+    <audio-controls src="xxx.mp3"></audio-controls>
 </div>
 ```
 
@@ -144,6 +144,8 @@ may be useful to observe the problems that arise with snap-scroll to motivate de
 decisions. For instance, any manual scrolling using scrollTo() or scrollIntoView() cannot 
 be used for the same reason.
 
+[This example] uses [remark], an HTML slideshow framework, which inspired the thumbnails and slide navigation behaviour. 
+
 
 ## How to Contribute
 
@@ -151,6 +153,7 @@ Issues and pull requests in [our GitHub repository][repo]
 are very welcome,
 particularly ones that address the user experience issues described above.
 
+[This example]: https://remarkjs.com/
 [repo]: https://github.com/gvwilson/browsercast
 [snap-scroll]: https://yihui.org/en/2023/09/snap-slides/
 [xie]: https://yihui.org/
