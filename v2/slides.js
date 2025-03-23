@@ -200,41 +200,37 @@ let isScrolling = false;
         const slides = document.querySelectorAll('.slide');
         slides[0].classList.add('active');
 
-        // doc.addEventListener('wheel', (e) => {
-        //     if (isScrolling) return; // Already scrolling
+        doc.addEventListener('wheel', (evt) => {
+            if (isScrolling) return; // Already scrolling
 
-        //     isScrolling = true;
-        //     const slides = document.querySelectorAll('.slide');
-        //     const curr = document.querySelector('.active');
-        //     const index = Array.from(slides).indexOf(curr);
+            isScrolling = true;
+            const slides = document.querySelectorAll('.slide');
+            const curr = document.querySelector('.active');
+            const index = Array.from(slides).indexOf(curr);
+            doc.body.style.overflow = 'hidden';
 
-        //     // Check if the vertical scroll
-        //     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        //       if (e.deltaY > 0) {
-        //         // Scroll down
-        //         console.log("Scrolled Down");
-        //         // e.preventDefault();
-        //         if (index + 1 < slides.length){
-        //             slides[index].classList.remove('active');
-        //             slides[index + 1].classList.add('active');
-        //         }
-        //       } else {
-        //         // Scroll up
-        //         console.log("Scrolled Up");
-        //         // e.preventDefault();
-        //         if (index - 1 >= 0){
-        //             slides[index].classList.remove('active');
-        //             slides[index - 1].classList.add('active');
-        //         }
-        //       }
-        //     }
 
-        //     setTimeout(() => {
-        //         isScrolling = false;
-        //       }, 1500); // Limit frequency of scroll events 
-        //   });
+            // Check if the vertical scroll
+            if (Math.abs(evt.deltaY) > Math.abs(evt.deltaX)) {
+              if (evt.deltaY > 0) {
+                // Scroll down
+                if (index + 1 < slides.length){
+                    slides[index].classList.remove('active');
+                    slides[index + 1].classList.add('active');
+                }
+              } else {
+                // Scroll up
+                if (index - 1 >= 0){
+                    slides[index].classList.remove('active');
+                    slides[index - 1].classList.add('active');
+                }
+              }
+            }
 
-        // TODO: Allow scrolling to trigger slide changes
+            setTimeout(() => {
+                isScrolling = false;
+              }, 200); // Limit frequency of scroll events 
+          });
 
         // press 'f' for fullscreen mode and 'o' for overview
         doc.addEventListener('keydown', (evt) => {
