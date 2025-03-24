@@ -20,7 +20,7 @@ scrolling inconsistencies. This approach was inspired by [remark].
 All of the logic and styling for this feature can be found in 
 `./v2/slides.css` and `./v2/slides.js`. 
 
-_Problems with smooth scrolling:_
+**Problems with smooth scrolling:**
 - Snap scroll aligned properly to the top of the slide when browsercast only had the slides, however, once the slide navigation bar was added, the slides would scroll too far vertically on some devices. The issue was exacerbated when the autoplay button was added. This led us to assume the bug was caused by the way the browser was calculating the snap point and causing alignment issues that varied across devices and potentially browsers.
 - The issue seemed to only happen with keyboard button navigation (up and down arrow) because when scrolling using a trackpad/mouse wheel, the scrolling would behave properly. We suspect this is because the browser handles both events differently.
 - Many attempts were made to fix the issue. Such attempts included:
