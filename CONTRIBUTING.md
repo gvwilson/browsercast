@@ -90,14 +90,14 @@ needed as the first element in the body to ensure proper handling:
 
 ```
 <div id="autoplay-container">
-      <label class="autoplay-btn">
+    <label class="autoplay-btn">
         <div class="autoplay-btn-wrapper">
-          <input type="checkbox" id="btn-toggle" name="btn-toggle" />
-          <span class="autoplay-text"> Autoplay </span>
-          <span class="slider"></span>
+            <input type="checkbox" id="btn-toggle" name="btn-toggle" />
+            <span class="autoplay-text"> Autoplay </span>
+            <span class="slider"></span>
         </div>
-      </label>
-    </div>
+    </label>
+</div>
 ```
 
 All of the logic and styling for this feature can be found in 
