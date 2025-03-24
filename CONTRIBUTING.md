@@ -15,11 +15,21 @@ when a user navigates to it for the first time.
 The current active slide is the only slide visible from the entire presentation on the
 main screen. This means that navigation to the next/previous slides are done by adding and 
 removing the `active` class name on each slide container. This is done to avoid any 
-scrolling inconsistencies that are device dependent. This approach was inspired by 
-[remark].
+scrolling inconsistencies. This approach was inspired by [remark].
 
 All of the logic and styling for this feature can be found in 
 `./v2/slides.css` and `./v2/slides.js`. 
+
+_Problems with smooth scrolling:_
+- Snap scroll aligned properly to the top of the slide when browsercast only had the slides, however, once the slide navigation bar was added, the slides would scroll too far vertically on some devices. The issue was exacerbated when the autoplay button was added. This led us to assume the bug was caused by the way the browser was calculating the snap point and causing alignment issues that varied across devices and potentially browsers.
+- The issue seemed to only happen with keyboard button navigation (up and down arrow) because when scrolling using a trackpad/mouse wheel, the scrolling would behave properly. We suspect this is because the browser handles both events differently.
+- Many attempts were made to fix the issue. Such attempts included:
+&emsp; - Disabling snapscroll when any manual scrolling was done. This caused a reliance on timeouts to wait for the scroll to finish which is device and browser dependent and therefore, unreliable.
+&emsp; - Manually calculating the top of the slide's offset and inserting it into scrollIntoView() or scrollTo() functions. This did not change the snap point at all.
+&emsp; - Adding a scroll-top-margin to the css file. This only fixed the issue when scrolling down but not up.
+&emsp; - Keeping snap scroll but overriding only the keyboard events for the up and down arrow. Since previous attempts to do manual calculations didn't work, this also didn't fix the issue.
+
+As a result, we have opted for the slides to snap into view to eliminate the dependencies on the calculation of the snap point.
 
 
 ### Audio Playback Bar
