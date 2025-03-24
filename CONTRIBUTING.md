@@ -4,7 +4,8 @@ The most recent version of Browsercast lives in `./v2`
 > Note: the demonstration in `./v2` uses handwritten HTML.
 > In practice,
 > we expect that most browsercasts will be generated from Markdown by a template engine.
-> We also expect this to be usable on larger mobile devices such as IPads and not only desktops.
+> We also expect this to be usable on larger mobile devices such as IPads and not only 
+> desktops.
 
 ## Feature Details
 
@@ -43,13 +44,16 @@ this is because the browser handles both events differently.
     - Adding a scroll-top-margin to the css file. This only fixed the issue when scrolling down but not up.
     - Keeping snap scroll but overriding only the keyboard events for the up and down arrows. Since previous attempts to do manual calculations didn't work, this also didn't fix the issue.
 
-As a result, we have opted for the slides to snap into view to eliminate the dependencies on device and browser scroll handling.
+As a result, we have opted for the slides to snap into view to eliminate the dependencies on 
+device and browser scroll handling.
 
 
 ### Audio Playback Bar
 
 To add an audio element to a slide, a custom Shadow DOM element "audio-controls" is used 
-in place of the regular audio element. This is to ensure the playback bar's styling is encapsulated and the element itself is reusable. The audio playback bar icons and inspiration was taken from the following [project] by Before Semicolon.
+in place of the regular audio element. This is to ensure the playback bar's styling is 
+encapsulated and the element itself is reusable. The audio playback bar icons and inspiration 
+was taken from the following [project] by Before Semicolon.
 
 The structure of the audio playback bar in each slide should follow this format to ensure 
 proper handling (where "xxx.mp3" should be the actual audio file):
@@ -93,14 +97,16 @@ All of the logic and styling for this feature can be found in
 `./v2/preview.css` and `./v2/preview.js`. 
 
 Things to improve/fix:
-- Currently, the css styling for the slide numbers to the left of the page may not work 
+- Currently, the CSS styling for the slide numbers to the left of the page may not work 
 well with slides in the triple digits or more. Proper handling of this case should be 
 done to avoid this.
 - When the user is navigating through the slides, the slide navigation bar will highlight 
 and move the current active slide to the top of the bar. Instead, we can move the 
 thumbnail into view only if the thumbnail is outside the view of the current visible 
 portion of the navigation bar.
-- Instead of having the slide navigation bar overlap with the main content on smaller screens, we can instead make the main content shrink to accomodate the navigation bar and expand into its normal size when the slide navigation bar is closed (like how Google Slides behaves).
+- Instead of having the slide navigation bar overlap with the main content on smaller screens, 
+we can instead make the main content shrink to accomodate the navigation bar and expand into 
+its normal size when the slide navigation bar is closed (like how Google Slides behaves).
 
 
 ### Autoplay
@@ -128,8 +134,19 @@ All of the logic and styling for this feature can be found in
 `./v2/autoplay.css` and `./v2/autoplay.js`. 
 
 The autoplay feature is accompanied by a UI hiding mechanic similar to Youtube's 
-video player. A countdown will show on the screen when autoplay is first turned on. The slide navigation bar and audio playback bar will also fade out of view and can be brought back into view by any mouse hovering movement. After a few seconds, it will fade back out unless the user pauses the audio. Then, the elements will remain in view until the audio is played again. 
-> Note: If the slide navigation bar is opened when autoplay is turned on, it will first close itself and then proceed to fade out. The reason for this is because when fading, the z-index of the navigation bar and the html elements on the slides are changing. This causes the slide's contents to jump in front of the slide navigation bar prematurely while it is fading. This is especially noticeable on smaller screens where the slide navigation bar is naturally overlapping the main slide.
+video player. 
+
+A countdown will show on the screen when autoplay is first turned on. The slide navigation bar 
+and audio playback bar will also fade out of view and can be brought back into view by any 
+mouse hovering movement. After a few seconds, it will fade back out unless the user pauses the 
+audio. Then, the elements will remain in view until the audio is played again. 
+
+> Note: If the slide navigation bar is opened when autoplay is turned on, it will first close 
+> itself and then proceed to fade out. The reason for this is because when fading, the z-index 
+> of the navigation bar and the html elements on the slides are changing. This causes the 
+> slide's contents to jump in front of the slide navigation bar prematurely while it is 
+> fading. This is especially noticeable on smaller screens where the slide navigation bar is 
+> naturally overlapping the main slide.
 
 Manual movement is not restricted while autoplay is on, even when the elements are faded 
 out. The user can navigate to previous or later slides through the arrow keys, scrolling 
@@ -139,7 +156,8 @@ If a slide has audio, it will move to the next slide only after the audio ends. 
 the user can still manually interact with the audio playback bar and jump through the 
 audio if needed.
 
-When the end of the presentation is reached, autoplay will finish showing the last slide then turn off the autoplay toggle and bring the other elements back into view.
+When the end of the presentation is reached, autoplay will finish showing the last slide then 
+turn off the autoplay toggle and bring the other elements back into view.
 
 Things to improve/fix:
 - When you first toggle autoplay on, the first slide will remain in view for 6 seconds, 
@@ -155,9 +173,6 @@ turned off, when you encounter that same audio element again, it will reset as i
 never been played before (then it will "remember" again). This behavior may or may not be 
 desirable and should be noted.
 
-[remark]: https://github.com/gnab/remark
-[project]: https://github.com/beforesemicolon/BFS-Projects/tree/audio-player-tag
-
 
 ## Useful Resources
 
@@ -168,9 +183,12 @@ may be useful to observe the problems that arise with snap-scroll to motivate de
 decisions. For instance, any manual scrolling using scrollTo() or scrollIntoView() cannot 
 be used for the same reason.
 
-[This example] uses [remark], an HTML slideshow framework, which inspired the thumbnails and slide navigation behaviour. 
+[This example] uses [remark], an HTML slideshow framework, which inspired the thumbnails and 
+slide navigation behaviour. 
 
-The audio playback bar makes use of [shadow DOMs] to provide encapsulation from external CSS styling. The following [shadowroot documentation] may be helpful for understanding how to interact with the playback bar.
+The audio playback bar makes use of [shadow DOMs] to provide encapsulation from external CSS 
+styling. The following [shadowroot documentation] may be helpful for understanding how to 
+interact with the playback bar.
 
 
 ## How to Contribute
@@ -179,9 +197,18 @@ Issues and pull requests in [our GitHub repository][repo]
 are very welcome,
 particularly ones that address the user experience issues described above.
 
+## Testing
+
+All testing is done manually by exploring all of the user scenarios when interacting with each 
+feature and seeing if it behaves as expected or intuitively.
+
+
 [Shadow DOMs]: https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM
 [shadowroot documentation]: https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot
 [This example]: https://remarkjs.com/
 [repo]: https://github.com/gvwilson/browsercast
 [snap-scroll]: https://yihui.org/en/2023/09/snap-slides/
 [xie]: https://yihui.org/
+[remark]: https://github.com/gnab/remark
+[project]: https://github.com/beforesemicolon/BFS-Projects/tree/audio-player-tag
+
