@@ -6,15 +6,26 @@
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./slides.css">
     <link rel="stylesheet" href="./preview.css">
+    <link rel="stylesheet" href="./autoplay.css">
     <script src="./slides.js" defer></script>
     <script src="./audio.js" defer></script>
     <script src="./preview.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="./autoplay.js" defer></script>
   </head>
   <body>
     <div class="preview-all" id="slide-navigation-container">
       <div class="preview-slider"></div>
       <div class="toggle-btn open" id="toggle"> <span></span> </div>
+    </div>
+
+    <div id="autoplay-container">
+      <label class="autoplay-btn">
+        <div class="autoplay-btn-wrapper">
+          <input type="checkbox" id="btn-toggle" name="btn-toggle" />
+          <span class="autoplay-text"> Autoplay </span>
+          <span class="slider"></span>
+        </div>
+      </label>
     </div>
 
     <hr/>

@@ -41,7 +41,7 @@ const audioState = {};
         let el = page.firstElementChild;
 
         // Skip sidebar
-        while (el && el.id === 'slide-navigation-container'){
+        while (el && (el.id === 'slide-navigation-container' || el.id === 'autoplay-container')){
             el = el.nextElementSibling;
         }
         
