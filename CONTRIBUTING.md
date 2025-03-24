@@ -8,6 +8,12 @@ The most recent version of Browsercast lives in `./v2`
 
 ## Feature Details
 
+### Keyboard Shortcuts
+- `F` - Enter Fullscreen
+- `O` - Open the Slide Overview
+- `Up Arrow` - Navigate to Previous Slide
+- `Down Arrow` - Navigate to Next Slide
+
 ### Slides
 Each slide is separated by `<hr/>` elements after all of the slide's content. This allows 
 the slides to be generated properly. Audio snippets in each slide are automatically played
