@@ -1,4 +1,5 @@
 .autoplay-btn {
+
     position: fixed;
     top: 30px;
     right: 3%;
@@ -49,6 +50,7 @@
   .autoplay-btn-wrapper {
     display: flex;
     align-items: center;
+    transition: opacity 0.5s ease-in-out;
   }
 
   .autoplay-text {
@@ -56,4 +58,31 @@
     font-size: 24px;
     color: rgb(36, 36, 36);
   }
-  
+
+  .autoplay-btn-wrapper.hide{
+    opacity: 0;
+}
+
+#countdown{
+    font-size: 90px;
+    position:fixed; 
+    z-index: 99999;
+    top: 40%; 
+    left: 45%;
+    color: #333;
+    animation: fade 1s ease-in-out;
+
+    width: 150px;           
+    height: 150px;         
+    background-color: rgba(140, 140, 140, 0.3);
+    border-radius: 50%;    
+
+    display: flex;          
+    justify-content: center;
+    align-items: center;   
+}
+
+
+#countdown.none{
+    display: none;
+}

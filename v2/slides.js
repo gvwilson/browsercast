@@ -40,8 +40,8 @@ let isScrolling = false;
     function createSlides() {
         let el = page.firstElementChild;
 
-        // Skip sidebar
-        while (el && (el.id === 'slide-navigation-container' || el.id === 'autoplay-container')){
+        // Skip sidebar & countdown
+        while (el && (el.id === 'slide-navigation-container' || el.id === 'autoplay-container' || el.id=='countdown')){
             el = el.nextElementSibling;
         }
         

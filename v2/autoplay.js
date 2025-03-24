@@ -1,7 +1,9 @@
 const slideNavBar = document.querySelector('#slide-navigation-container');
 const audioBars = document.querySelectorAll('audio-controls');
+const autoplayToggle = document.querySelector('.autoplay-btn-wrapper'); 
 const toggleSliderBtn = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
+const toggleBtn = document.getElementById('toggle');
 // let interval;
 let autoScrollState = 0;
 let scrollTimeout;
@@ -10,11 +12,12 @@ let scrollTimeout;
 let autoplayEnabled = false; // autoplay is off 
 let hideControlsTimeout; 
 
+
 function hideAudioBars(visibleState) {
     audioBars.forEach((bar) => {
         const shadowRoot = bar.shadowRoot;
         const content = shadowRoot.querySelector('.audio-bar');
-        
+
         if (shadowRoot) {
             if (visibleState) {
                 content.classList.add('hide');
@@ -27,8 +30,8 @@ function hideAudioBars(visibleState) {
 
 function closeSlideNav(){
     const previewSlider = document.querySelector('.preview-slider');
-    const toggleBtn = document.getElementById('toggle');
-    
+const toggleBtn = document.getElementById('toggle');
+
     if (!previewSlider.classList.contains('open')){
         previewSlider.classList.toggle('open');
         toggleBtn.classList.toggle('open');
@@ -37,6 +40,7 @@ function closeSlideNav(){
 
 function showControls() {
     slideNavBar.classList.remove('hide');
+    autoplayToggle.classList.remove('hide');
     if (audioBars.length > 0) {
         hideAudioBars(0);
     }
@@ -45,6 +49,7 @@ function showControls() {
 function hideControls() {
     closeSlideNav();
     slideNavBar.classList.add('hide');
+    autoplayToggle.classList.add('hide');
     if (audioBars.length > 0) {
         hideAudioBars(1);
     }
@@ -54,7 +59,6 @@ function hideControls() {
 function handleMouseMove() {
     // when autoplay is on and hover over the screen, make controls visible and hide after 3 seconds 
     if (autoplayEnabled) {
-        console.log("should only work when autoplay is on,  " + autoplayEnabled); 
         showControls();
         clearTimeout(hideControlsTimeout); 
 
@@ -96,6 +100,28 @@ function waitForAudio(currAudio) {
     });
 }
 
+function countDown() {
+    let count = 2; 
+    let countdownEl = document.getElementById('countdown');
+    countdownEl.classList.remove('none'); 
+
+    let interval = setInterval(() => {
+        if (count > 0) { 
+
+            countdownEl.textContent = count;
+            count--; 
+
+        } else {
+            console.log("Countdown done"); 
+            countdownEl.classList.add('none'); 
+            countdownEl.textContent = 3;
+            // Stop the interval once it reaches 0
+            clearInterval(interval);  
+
+        }
+    }, 1000); 
+}
+
 async function autoScroll () {
     // 1. Play audio if exists, if not, wait a fixed interval (ie. 5 secs) and scroll to next
     // 2. Repeat until end reached
@@ -103,6 +129,7 @@ async function autoScroll () {
     // Get current slide
     const curr = document.querySelector('.active');
     const index = Array.from(slides).indexOf(curr);
+    
 
     // Get current audio if exists
     const currAudio = curr.querySelector('audio-controls');
@@ -116,9 +143,15 @@ async function autoScroll () {
             scrollTimeout = setTimeout(resolve, 3000);
         });
     }
+
+    // start the countdown when autoplay starts at first slide 
+    // if (index === 0 && autoplayEnabled) {
+    //     alert("start");    // Show alert only on the first slide when autoplay begins
+    // }
     
     if (autoplayEnabled && index + 1 < slides.length){ // Avoid scrolling even after disabled
         const htmlElement = document.documentElement;
+    
 
         // Temporarily disable scroll-snap-type 
         // const originalSnapType = htmlElement.style.scrollSnapType;
@@ -142,6 +175,9 @@ async function autoScroll () {
         scrollTimeout = setTimeout(autoScroll, 3000);
     } else {
         console.log('Reached end.');
+        // when reach the end, autoplay stops and controls show 
+        toggleSliderBtn.click();
+        toggleBtn.click();
     }
 
 }
@@ -154,12 +190,13 @@ function addEventListeners () {
 
             setTimeout(() => {
                 slideNavBar.classList.add('hide');
+                autoplayToggle.classList.add('hide');
                 if (audioBars.length > 0){
                     hideAudioBars(1);
                 }
-                // visibleState = 0;
             }, 500);
             autoplayEnabled = true; 
+            
 
             // Play audio if paused
             const curr = document.querySelector('.active');
@@ -172,8 +209,12 @@ function addEventListeners () {
                     content.play();
                 }
             }
-
-
+            // count down starts only when autoplay starts from the first slide 
+            const currentSlide = document.querySelector('.slide.active'); 
+            if (currentSlide.id === 'slide-1'){
+                countDown();
+            }
+            
             setTimeout(() => {
                 autoScroll();
             }, 3000);
@@ -183,6 +224,7 @@ function addEventListeners () {
             // console.log("showing controls when autoplay is off")
             clearTimeout(hideControlsTimeout); 
             slideNavBar.classList.remove('hide');
+            autoplayToggle.classList.remove('hide');
             if (audioBars.length > 0){
                 hideAudioBars(0);
             }
@@ -191,12 +233,6 @@ function addEventListeners () {
             // console.log("making sure autoplay is turned off??" + autoplayEnabled);
         }
     });
-
-    // showing controls when audio is ended 
-    // document.addEventListener('AudioEnded', () => {
-    //     showControls();
-    //     clearTimeout(hideControlsTimeout); 
-    // });
 
     // hover effect when controlling slides with mouse 
     document.addEventListener('mousemove', handleMouseMove);
