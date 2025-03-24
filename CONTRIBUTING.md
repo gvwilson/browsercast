@@ -30,10 +30,10 @@ alignment issues that varied across devices and potentially browsers.
 when scrolling using a trackpad/mouse wheel, the scrolling would behave properly. We suspect 
 this is because the browser handles both events differently.
 - Many attempts were made to fix the issue. Such attempts included:
-        - Disabling snapscroll when any manual scrolling was done. This caused a reliance on timeouts to wait for the scroll to finish which is device and browser dependent and therefore, unreliable.
-        - Manually calculating the top of the slide's offset and inserting it into scrollIntoView() or scrollTo() functions. This did not change the snap point at all.
-        - Adding a scroll-top-margin to the css file. This only fixed the issue when scrolling down but not up.
-        - Keeping snap scroll but overriding only the keyboard events for the up and down arrow. Since previous attempts to do manual calculations didn't work, this also didn't fix the issue.
+    - Disabling snapscroll when any manual scrolling was done. This caused a reliance on timeouts to wait for the scroll to finish which is device and browser dependent and therefore, unreliable.
+    - Manually calculating the top of the slide's offset and inserting it into scrollIntoView() or scrollTo() functions. This did not change the snap point at all.
+    - Adding a scroll-top-margin to the css file. This only fixed the issue when scrolling down but not up.
+    - Keeping snap scroll but overriding only the keyboard events for the up and down arrow. Since previous attempts to do manual calculations didn't work, this also didn't fix the issue.
 
 As a result, we have opted for the slides to snap into view to eliminate the dependencies on the calculation of the snap point.
 
