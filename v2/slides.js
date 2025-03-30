@@ -247,14 +247,14 @@ let isScrolling = false;
             else if (evt.key === 'o') { // Overview feature no longer works with new slide configuration
                 doc.body.classList.toggle('overview');
             } 
-            else if (evt.key === 'ArrowDown') {
+            else if (evt.key === 'ArrowDown'|| evt.key === 'ArrowRight') {
                 evt.preventDefault();
                 if (index + 1 < slides.length){
                     slides[index].classList.remove('active');
                     slides[index + 1].classList.add('active');
                 }
             }
-            else if (evt.key === 'ArrowUp'){
+            else if (evt.key === 'ArrowUp' || evt.key === 'ArrowLeft'){
                 evt.preventDefault();
                 if (index - 1 >= 0){
                     slides[index].classList.remove('active');

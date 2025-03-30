@@ -4,11 +4,10 @@ const autoplayToggle = document.querySelector('.autoplay-btn-wrapper');
 const toggleSliderBtn = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
 const toggleBtn = document.getElementById('toggle');
-// let interval;
+
 let autoScrollState = 0;
 let scrollTimeout;
 
-// let visibleState = 1; // 1 means it is visible
 let autoplayEnabled = false; // autoplay is off 
 let hideControlsTimeout; 
 
@@ -54,7 +53,6 @@ function hideControls() {
         hideAudioBars(1);
     }
 }
-
 
 function handleMouseMove() {
     // when autoplay is on and hover over the screen, make controls visible and hide after 3 seconds 
@@ -130,7 +128,6 @@ async function autoScroll () {
     const curr = document.querySelector('.active');
     const index = Array.from(slides).indexOf(curr);
     
-
     // Get current audio if exists
     const currAudio = curr.querySelector('audio-controls');
 
@@ -143,16 +140,10 @@ async function autoScroll () {
             scrollTimeout = setTimeout(resolve, 3000);
         });
     }
-
-    // start the countdown when autoplay starts at first slide 
-    // if (index === 0 && autoplayEnabled) {
-    //     alert("start");    // Show alert only on the first slide when autoplay begins
-    // }
     
     if (autoplayEnabled && index + 1 < slides.length){ // Avoid scrolling even after disabled
         const htmlElement = document.documentElement;
     
-
         // Temporarily disable scroll-snap-type 
         // const originalSnapType = htmlElement.style.scrollSnapType;
         // htmlElement.style.scrollSnapType = 'none';
@@ -209,7 +200,8 @@ function addEventListeners () {
                     content.play();
                 }
             }
-            // count down starts only when autoplay starts from the first slide 
+            
+            // start the countdown when autoplay starts at first slide  
             const currentSlide = document.querySelector('.slide.active'); 
             if (currentSlide.id === 'slide-1'){
                 countDown();
@@ -221,7 +213,6 @@ function addEventListeners () {
 
         } else {
             // controls visible    
-            // console.log("showing controls when autoplay is off")
             clearTimeout(hideControlsTimeout); 
             slideNavBar.classList.remove('hide');
             autoplayToggle.classList.remove('hide');
@@ -230,7 +221,6 @@ function addEventListeners () {
             }
             autoplayEnabled = false;
             clearTimeout(scrollTimeout); 
-            // console.log("making sure autoplay is turned off??" + autoplayEnabled);
         }
     });
 
