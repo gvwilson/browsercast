@@ -3,7 +3,7 @@ const audioBars = document.querySelectorAll('audio-controls');
 const autoplayToggle = document.querySelector('.autoplay-btn-wrapper'); 
 const toggleSliderBtn = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
-const interval = 3000; // set interval for how long scroll will wait
+const slideInterval = 4000; // set interval for how long scroll will wait
 const toggleBtn = document.getElementById('toggle');
 
 let isAudioManuallyPaused = false 
@@ -147,7 +147,7 @@ async function autoScroll () {
 
     // continue scrolling after fixed interval if new slide not the last one
     if (index + 1 < slides.length - 1 && autoplayEnabled) {
-        scrollTimeout = setTimeout(autoScroll, interval);
+        scrollTimeout = setTimeout(autoScroll, slideInterval);
     } else {
         console.log('Reached end.');
         // when reach the end, autoplay stops and controls show 
@@ -205,6 +205,7 @@ function addEventListeners () {
             }
 
             autoplayEnabled = false; 
+            clearTimeout (scrollTimeout) ;
 
         }
     });
