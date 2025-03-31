@@ -1,6 +1,5 @@
 // Inspired by https://yihui.org/en/2023/09/snap-slides/
 const audioState = {};
- isAudioInitialized = false;
 
 (function(doc) {
     let page = doc.body;  // <body> is container of slides
@@ -88,30 +87,45 @@ const audioState = {};
 	// slide === entries[0] in the handler below
 	function obs(entries, observer) {
         slideId = slide.getAttribute('id');
+        audioControls = slide.querySelector('audio-controls'); 
+
+
 	    if (entries[0].isIntersecting) {
-		window.location.hash = slideId;
-		console.log(`slide ${slideId} enter`);
-		audioControls = slide.querySelector('audio-controls'); 
-        if (audioControls){
-            audio = audioControls.shadowRoot.querySelector('audio');
-            if (audio) {
-                // Check if audio has been played before
-                if (!audioState[slideId]){
-                    audio.play();
-                    audioState[slideId] = true;
-                } else {
-                    console.log('Audio already played before.');
+            window.location.hash = slideId;
+            console.log(`slide ${slideId} enter`);
+
+            // Remove "active" class from all slides
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+
+            // add "active" class to the current slide
+            slide.classList.add('active'); 
+
+            if (audioControls){
+                audio = audioControls.shadowRoot.querySelector('audio');
+                if (audio) {
+    
+                    if(autoplayEnabled){
+                        // only replay audio when autoplay is on 
+                        audio.play();
+                    } else {
+                        // Check if audio has been played before and play the audio once 
+                        if (!audioState[slideId]){
+                            audio.play();
+                            audioState[slideId] = true;
+                        } else {
+                            console.log('Audio already played before.');
+                        }
+                    }
                 }
             }
-        }
 	    }
 	    else {
-		console.log(`slide ${slideId} exit`);
-		audio = slide.querySelector('audio');
-		if (audio) {
-		    audio.pause();
-		    audio.currentTime = 0.0;
-		}
+            console.log(`slide ${slideId} exit`);
+            if (audioControls) {
+                audio = audioControls.shadowRoot.querySelector('audio');
+                audio.pause();
+                audio.currentTime = 0.0;
+            }
 	    }
 	}
 	const observer = new IntersectionObserver(obs, {threshold: 0.5});
