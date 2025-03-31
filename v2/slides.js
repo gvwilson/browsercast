@@ -1,5 +1,6 @@
 // Inspired by https://yihui.org/en/2023/09/snap-slides/
 const audioState = {};
+let isScrolling = false;
 
 (function(doc) {
     let page = doc.body;  // <body> is container of slides
@@ -39,7 +40,7 @@ const audioState = {};
     function createSlides() {
         let el = page.firstElementChild;
 
-        // Skip sidebar
+        // skip unrelated elements
         while (el && (el.id === 'slide-navigation-container' || el.id === 'autoplay-container')){
             el = el.nextElementSibling;
         }
@@ -95,10 +96,10 @@ const audioState = {};
             console.log(`slide ${slideId} enter`);
 
             // Remove "active" class from all slides
-            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            // document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
 
             // add "active" class to the current slide
-            slide.classList.add('active'); 
+            // slide.classList.add('active'); 
 
             if (audioControls){
                 audio = audioControls.shadowRoot.querySelector('audio');
@@ -187,6 +188,30 @@ const audioState = {};
         });
     }
 
+    // ensures the new slide configuration navigates to the right slide
+    // even after refresh
+    function initSlidePos(slides) {
+        const hash = window.location.hash;
+        let num = 0;
+        if (hash){
+            const slideId = window.location.hash.substring(1).split('-');
+            num = parseInt(slideId[1]) - 1;
+        }
+        slides[num].classList.add('active');
+    }
+
+    // Go to previous slide
+    function prevSlide(slides, index) {
+        slides[index].classList.remove('active');
+        slides[index - 1].classList.add('active');
+    }
+
+    // Go to next slide
+    function nextSlide(slides, index) {
+        slides[index].classList.remove('active');
+        slides[index + 1].classList.add('active');
+    }
+
     // set up and run
     function main(doc) {
         page.classList.add('slide-container');
@@ -195,17 +220,66 @@ const audioState = {};
         }
         decorateSlides();
         initAudioState();
-        
+
+        const slides = document.querySelectorAll('.slide');
+        initSlidePos(slides);
+
+        // Add keyboard shortcuts and trackpad event
+        doc.addEventListener('wheel', (evt) => {
+            if (isScrolling) return; // already scrolling
+
+            isScrolling = true;
+            const curr = document.querySelector('.active');
+            const index = Array.from(slides).indexOf(curr);
+            doc.body.style.overflow = 'hidden';
+
+            // check if the vertical scroll
+            if (Math.abs(evt.deltaY) > Math.abs(evt.deltaX)) {
+              if (evt.deltaY > 0) {
+                // scroll down
+                if (index + 1 < slides.length){
+                    nextSlide(slides, index);
+                }
+              } else {
+                // scroll up
+                if (index - 1 >= 0){
+                    prevSlide(slides, index);
+                }
+              }
+            }
+
+            setTimeout(() => {
+                isScrolling = false;
+            }, 500); // timeout to limit frequency of scroll events 
+          });
+
+
         // press 'f' for fullscreen mode and 'o' for overview
-        doc.addEventListener('keyup', (evt) => {
+        doc.addEventListener('keydown', (evt) => {
             if (evt.target !== doc.body) {
                 return;
             }
+            const slides = document.querySelectorAll('.slide');
+            const curr = document.querySelector('.active');
+            const index = Array.from(slides).indexOf(curr);
+
             if (evt.key === 'f') {
                 doc.documentElement.requestFullscreen();
             }
-            else if (evt.key === 'o') {
+            else if (evt.key === 'o') { // NOTE: overview feature no longer works with new slide configuration
                 doc.body.classList.toggle('overview');
+            } 
+            else if (evt.key === 'ArrowDown' || evt.key === 'ArrowRight') {
+                evt.preventDefault();
+                if (index + 1 < slides.length){
+                    nextSlide(slides, index);
+                }
+            }
+            else if (evt.key === 'ArrowUp' || evt.key == 'ArrowLeft'){
+                evt.preventDefault();
+                if (index - 1 >= 0){
+                    prevSlide(slides, index);
+                }
             }
             sessionStorage.setItem('body-class', doc.body.className);
         });
