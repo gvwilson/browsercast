@@ -4,6 +4,7 @@ const toggleSliderBtn = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
 const interval = 3000; // set interval for how long scroll will wait
 
+let isAudioManuallyPaused = false 
 let autoScrollState = 0;
 let scrollTimeout;
 let autoplayEnabled = false; // autoplay is off 
@@ -64,19 +65,24 @@ function handleMouseMove() {
             const audioElement = audioPlayer.shadowRoot.querySelector('audio'); 
 
             audioElement.addEventListener('pause', () => {
-                showControls();
-                clearTimeout(hideControlsTimeout);
+                if(isAudioManuallyPaused){
+                    // show controls when audio is manually paused 
+                    showControls();
+                    clearTimeout(hideControlsTimeout);
+                    console.log("it still shows the controsl");
+                } 
             });
 
-            if (!audioElement.paused) {
+            if (audioElement.play) {
                 hideControlsTimeout = setTimeout(() => {
                     hideControls();
                 }, 3000);
             }
 
         } else {
+            // when slide has no audio 
             hideControlsTimeout = setTimeout(() => {
-                    hideControls();
+                hideControls();
             }, 3000);
         }
 
@@ -161,16 +167,9 @@ function addEventListeners () {
             if (audioBars.length > 0){
                 hideAudioBars(0);
             }
-            autoplayEnabled = false;
-            clearTimeout(scrollTimeout); 
+            autoplayEnabled = false; 
         }
     });
-
-    // showing controls when audio is ended 
-    // document.addEventListener('AudioEnded', () => {
-    //     showControls();
-    //     clearTimeout(hideControlsTimeout); 
-    // });
 
     // hover effect when controlling slides with mouse 
     document.addEventListener('mousemove', handleMouseMove);

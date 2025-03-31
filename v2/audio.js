@@ -19,9 +19,26 @@
             // Play button click event
             this.playBtn.addEventListener('click', () => {
                 if (this.audio.paused) {
-                    this.audio.play();
+                    // make sure the audio is ready to be played 
+                    console.log(this.audio.readyState);
+                    if (this.audio.readyState < 3) {
+                        // forces reloading the audio when it is not sufficiently loaded 
+                        // (readyState < 3 means it hasn't buffered enough to play)
+
+                        this.audio.load(); 
+                        this.audio.addEventListener("canplay", () => {
+                            // playback starts only when enough data is available after a manual reload
+                            this.audio.play();
+                        }, { once: true });  
+                    } else {
+                        this.audio.play();
+                    }
+
                     this.playBtn.classList.add('playing');
+
+
                 } else {
+                    console.log("pause");
                     this.audio.pause();
                     this.playBtn.classList.remove('playing');
                 }
@@ -33,6 +50,7 @@
 
             this.audio.addEventListener('pause', () => {
                 this.playBtn.classList.remove('playing');
+                isAudioManuallyPaused = true 
             });
 
             this.audio.addEventListener('ended', () => {
@@ -40,8 +58,7 @@
                 console.log("Audio ended.");
                 this.playBtn.textContent = 'Play';
                 this.playBtn.classList.remove('playing');
-                // fire a new event that shows control when audio ended
-                document.dispatchEvent(new Event('AudioEnded'));
+                isAudioManuallyPaused = false 
             });
 
             this.audio.addEventListener('loadedmetadata', () => {;
