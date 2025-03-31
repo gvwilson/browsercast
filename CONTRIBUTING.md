@@ -87,6 +87,7 @@ On the left of the screen the slide navigation bar shows all the thumbnails of t
 in the current presentation and allows for quicker navigation. 
 
 The thumbnail generation was inspired and taken from [remark].
+It iterates through the slide `<div>`s and clones its content of the slide, excluding certain elements of audio and page numbers, by filtering them out. Instead, if audio is detected, it adds an audio icon to the thumbnail. The cloned content is appended to a newly created thumbnail div, representing the thumbnail of the slides. To resize the thumbnail to a smaller version while preserving its proportions, CSS `aspect-ratio` property is applied. 
 
 When generating the HTML version for any presentation, the following code snippet is 
 needed as the first element in the body to ensure proper handling:
