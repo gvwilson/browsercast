@@ -40,7 +40,7 @@ let isScrolling = false;
     function createSlides() {
         let el = page.firstElementChild;
 
-        // Skip sidebar
+        // skip unrelated elements
         while (el && (el.id === 'slide-navigation-container' || el.id === 'autoplay-container')){
             el = el.nextElementSibling;
         }
@@ -96,10 +96,10 @@ let isScrolling = false;
             console.log(`slide ${slideId} enter`);
 
             // Remove "active" class from all slides
-            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            // document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
 
             // add "active" class to the current slide
-            slide.classList.add('active'); 
+            // slide.classList.add('active'); 
 
             if (audioControls){
                 audio = audioControls.shadowRoot.querySelector('audio');
@@ -188,6 +188,30 @@ let isScrolling = false;
         });
     }
 
+    // ensures the new slide configuration navigates to the right slide
+    // even after refresh
+    function initSlidePos(slides) {
+        const hash = window.location.hash;
+        let num = 0;
+        if (hash){
+            const slideId = window.location.hash.substring(1).split('-');
+            num = parseInt(slideId[1]) - 1;
+        }
+        slides[num].classList.add('active');
+    }
+
+    // Go to previous slide
+    function prevSlide(slides, index) {
+        slides[index].classList.remove('active');
+        slides[index - 1].classList.add('active');
+    }
+
+    // Go to next slide
+    function nextSlide(slides, index) {
+        slides[index].classList.remove('active');
+        slides[index + 1].classList.add('active');
+    }
+
     // set up and run
     function main(doc) {
         page.classList.add('slide-container');
@@ -198,39 +222,37 @@ let isScrolling = false;
         initAudioState();
 
         const slides = document.querySelectorAll('.slide');
-        slides[0].classList.add('active');
+        initSlidePos(slides);
 
+        // Add keyboard shortcuts and trackpad event
         doc.addEventListener('wheel', (evt) => {
-            if (isScrolling) return; // Already scrolling
+            if (isScrolling) return; // already scrolling
 
             isScrolling = true;
-            const slides = document.querySelectorAll('.slide');
             const curr = document.querySelector('.active');
             const index = Array.from(slides).indexOf(curr);
             doc.body.style.overflow = 'hidden';
 
-
-            // Check if the vertical scroll
+            // check if the vertical scroll
             if (Math.abs(evt.deltaY) > Math.abs(evt.deltaX)) {
               if (evt.deltaY > 0) {
-                // Scroll down
+                // scroll down
                 if (index + 1 < slides.length){
-                    slides[index].classList.remove('active');
-                    slides[index + 1].classList.add('active');
+                    nextSlide(slides, index);
                 }
               } else {
-                // Scroll up
+                // scroll up
                 if (index - 1 >= 0){
-                    slides[index].classList.remove('active');
-                    slides[index - 1].classList.add('active');
+                    prevSlide(slides, index);
                 }
               }
             }
 
             setTimeout(() => {
                 isScrolling = false;
-              }, 200); // Limit frequency of scroll events 
+            }, 500); // timeout to limit frequency of scroll events 
           });
+
 
         // press 'f' for fullscreen mode and 'o' for overview
         doc.addEventListener('keydown', (evt) => {
@@ -244,21 +266,19 @@ let isScrolling = false;
             if (evt.key === 'f') {
                 doc.documentElement.requestFullscreen();
             }
-            else if (evt.key === 'o') { // Overview feature no longer works with new slide configuration
+            else if (evt.key === 'o') { // NOTE: overview feature no longer works with new slide configuration
                 doc.body.classList.toggle('overview');
             } 
-            else if (evt.key === 'ArrowDown') {
+            else if (evt.key === 'ArrowDown' || evt.key === 'ArrowRight') {
                 evt.preventDefault();
                 if (index + 1 < slides.length){
-                    slides[index].classList.remove('active');
-                    slides[index + 1].classList.add('active');
+                    nextSlide(slides, index);
                 }
             }
-            else if (evt.key === 'ArrowUp'){
+            else if (evt.key === 'ArrowUp' || evt.key == 'ArrowLeft'){
                 evt.preventDefault();
                 if (index - 1 >= 0){
-                    slides[index].classList.remove('active');
-                    slides[index - 1].classList.add('active');
+                    prevSlide(slides, index);
                 }
             }
             sessionStorage.setItem('body-class', doc.body.className);
