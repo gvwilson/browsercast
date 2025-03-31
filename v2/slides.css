@@ -13,10 +13,6 @@
     /* scroll-snap-align: start; */
 }
 
-.slide-img{
-    width: 600px;
-    height: 400px;
-}
 .slide.active {
     display: block; 
 }
@@ -117,8 +113,4 @@ span.control-pause {
     width: 100%;
     left: 34px;
     right: 0;
-}
-
-.reference{
-    font-size: small;
 }

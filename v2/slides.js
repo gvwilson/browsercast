@@ -40,9 +40,8 @@ let isScrolling = false;
     function createSlides() {
         let el = page.firstElementChild;
 
-        // Skip unrelated elements; sidebar, countdown
-        while (el && (el.id === 'slide-navigation-container' || el.id === 'autoplay-container' || el.id=='countdown')){
-
+        // skip unrelated elements
+        while (el && (el.id === 'slide-navigation-container' || el.id === 'autoplay-container')){
             el = el.nextElementSibling;
         }
         
@@ -270,14 +269,12 @@ let isScrolling = false;
             else if (evt.key === 'o') { // NOTE: overview feature no longer works with new slide configuration
                 doc.body.classList.toggle('overview');
             } 
-
             else if (evt.key === 'ArrowDown' || evt.key === 'ArrowRight') {
                 evt.preventDefault();
                 if (index + 1 < slides.length){
                     nextSlide(slides, index);
                 }
             }
-
             else if (evt.key === 'ArrowUp' || evt.key == 'ArrowLeft'){
                 evt.preventDefault();
                 if (index - 1 >= 0){
