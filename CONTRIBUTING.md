@@ -12,8 +12,8 @@ The most recent version of Browsercast lives in `./v2`
 ### Keyboard Shortcuts
 - `F` - Enter Fullscreen
 - `O` - Open the Slide Overview
-- `Up Arrow` - Navigate to Previous Slide
-- `Down Arrow` - Navigate to Next Slide
+- `Up/Left Arrow` - Navigate to Previous Slide
+- `Down/Right Arrow` - Navigate to Next Slide
 
 ### Slides
 Each slide is separated by `<hr/>` elements after all of the slide's content. This allows 
@@ -46,6 +46,11 @@ this is because the browser handles both events differently.
 
 As a result, we have opted for the slides to snap into view to eliminate the dependencies on 
 device and browser scroll handling.
+
+Things to improve:
+- Add next and previous arrow onto the UI so users can choose to click those to navigate.
+- Add a progress bar to let the user know how far along they are through the slides.
+- Make compatible with other mobile devices
 
 
 ### Audio Playback Bar
@@ -172,6 +177,11 @@ automatically play if encountered again. However, when autoplay is turned on and
 turned off, when you encounter that same audio element again, it will reset as if it has 
 never been played before (then it will "remember" again). This behavior may or may not be 
 desirable and should be noted.
+- Currently, the trackpad scrolls through multiple slides even with a single trackpad 
+movement. This is done with an interval to control the frequency of triggering the wheel 
+event. Instead, one trackpad scroll can behave more like the arrow keys, where it scrolls 
+to one slide with each movement.
+- Give the user an option to 'pause' autoplay without turning it off in case they want to stay on a slide for a bit longer. One way this can be done by having a continue button that counts down and moves on unless stopped.
 
 
 ## Useful Resources
